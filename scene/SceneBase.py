@@ -1,7 +1,7 @@
 
 
 class SceneBase:
-    def __init__(self):
+    def __init__(self, resolution):
         pass
 
     def on_update(self):

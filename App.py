@@ -9,12 +9,13 @@ class App:
         self._clock = None
         self._done = False
         self._player = None
-        self._scene = GameScene()
+        self._resolution = (760, 520)
+        self._scene = GameScene(self._resolution)
 
     def on_init(self):
         self._player = Player()
         pygame.init()
-        self._screen = pygame.display.set_mode((400, 300))
+        self._screen = pygame.display.set_mode(self._resolution)
         self._clock = pygame.time.Clock()
 
     def on_execute(self):

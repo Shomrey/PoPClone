@@ -6,8 +6,8 @@ def main():
     try:
         app = App()
         app.on_execute()
-    except:
-        e = sys.exc_info()[0]
+    except Exception as e:
+        # e = sys.exc_info()[0]
         print(f'Error: {e}')
 
 

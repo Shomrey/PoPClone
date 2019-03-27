@@ -9,9 +9,8 @@ black = 0, 0, 0
 edgeh = 315
 edgew = 500
 
+
 def collide(herorect):
-    #if ballrect.left < 0 or ballrect.right > width or ballrect.top < 0 or ballrect.bottom > height:
-     #   return True
     if herorect.top < edgeh < herorect.bottom and herorect.left < edgew:
         return True
     if herorect.bottom > edgeh > herorect.top and herorect.left < edgew:

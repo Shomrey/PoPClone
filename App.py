@@ -1,4 +1,6 @@
 import pygame
+from scene.GameScene import GameScene
+from Player import Player
 
 
 class App:
@@ -6,9 +8,11 @@ class App:
         self._screen = None
         self._clock = None
         self._done = False
-        self._position = [30, 30]
+        self._player = None
+        self._scene = GameScene()
 
     def on_init(self):
+        self._player = Player()
         pygame.init()
         self._screen = pygame.display.set_mode((400, 300))
         self._clock = pygame.time.Clock()
@@ -28,15 +32,17 @@ class App:
         self.on_cleanup()
 
     def on_update(self):
+        self._scene.on_update()
+        self._player.on_update()
         pressed = pygame.key.get_pressed()
-        if pressed[pygame.K_UP]: self._position[1] -= 3
-        if pressed[pygame.K_DOWN]: self._position[1] += 3
-        if pressed[pygame.K_LEFT]: self._position[0] -= 3
-        if pressed[pygame.K_RIGHT]: self._position[0] += 3
+        if pressed[pygame.K_UP]: self._player.set_position_relative(None, -3)
+        if pressed[pygame.K_DOWN]: self._player.set_position_relative(None, 3)
+        if pressed[pygame.K_LEFT]: self._player.set_position_relative(-3, None)
+        if pressed[pygame.K_RIGHT]: self._player.set_position_relative(3, None)
 
     def on_render(self):
-        self._screen.fill((0, 0, 0))
-        pygame.draw.rect(self._screen, (0, 128, 255), pygame.Rect(self._position[0], self._position[1], 60, 60))
+        self._scene.on_render(self._screen)
+        self._player.on_render(self._screen)
         pygame.display.flip()   # this call is required to perform updates to the game screen
 
     def on_event(self, event):

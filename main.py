@@ -1,4 +1,14 @@
-import pygame,  sys, os
-from pygame.locals import *
+from App import App
 
-pygame.init()
+
+def main():
+    try:
+        app = App()
+        app.on_execute()
+    except Exception as e:
+        print(f'Error: {e}')
+
+
+if __name__ == '__main__':
+    main()
+

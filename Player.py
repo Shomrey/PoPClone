@@ -15,6 +15,9 @@ class Player(pygame.sprite.Sprite):
         position_rect = self._image.get_rect().move(self._position[0], self._position[1])
         screen.blit(self._image, position_rect)
 
+    def get_position(self):
+        return self._position
+
     def set_position(self, x, y):
         if x is not None:
             self._position[0] = x

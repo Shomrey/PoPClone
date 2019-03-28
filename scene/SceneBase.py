@@ -1,5 +1,3 @@
-
-
 class SceneBase:
     def __init__(self, resolution):
         pass

@@ -1,6 +1,7 @@
 import pygame
 from scene.GameScene import GameScene
 from Player import Player
+from InputManager import InputManager
 
 
 class App:
@@ -9,11 +10,13 @@ class App:
         self._clock = None
         self._done = False
         self._player = None
+        self._input_manager = None
         self._resolution = (760, 520)
         self._scene = GameScene(self._resolution)
 
     def on_init(self):
         self._player = Player()
+        self._input_manager = InputManager(self._player)
         pygame.init()
         self._screen = pygame.display.set_mode(self._resolution)
         self._clock = pygame.time.Clock()
@@ -35,11 +38,7 @@ class App:
     def on_update(self):
         self._scene.on_update()
         self._player.on_update()
-        pressed = pygame.key.get_pressed()
-        if pressed[pygame.K_UP]: self._player.set_position_relative(None, -3)
-        if pressed[pygame.K_DOWN]: self._player.set_position_relative(None, 3)
-        if pressed[pygame.K_LEFT]: self._player.set_position_relative(-3, None)
-        if pressed[pygame.K_RIGHT]: self._player.set_position_relative(3, None)
+        self._input_manager.on_update()
 
     def on_render(self):
         self._scene.on_render(self._screen)

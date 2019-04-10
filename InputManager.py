@@ -13,7 +13,7 @@ class InputManager:
     def on_update(self):
         pressed = pygame.key.get_pressed()
 
-        if self._jump_queue.empty():
+        if not self._jump_queue.empty():
             pressed = self._none_pressed
             self._jump_continue()
 
@@ -30,21 +30,21 @@ class InputManager:
             else: self._stand_up()
 
     def _jump_up(self):
-        jump_values = (-5, -2, -1, 0, 1, 2, 5)
+        jump_values = (-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0)
         for i in jump_values: self._jump_queue.put(i)
         self._jump_x = 0
         self._jump_continue()
 
     def _jump_left(self):
-        jump_values = (-3, -1, 0, 0, 0, 1, 3)
+        jump_values = (-9, -8, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 8, 9, 0, 0)
         for i in jump_values: self._jump_queue.put(i)
-        self._jump_x = -3
+        self._jump_x = -6
         self._jump_continue()
 
     def _jump_right(self):
-        jump_values = (-3, -1, 0, 0, 0, 1, 3)
+        jump_values = (-9, -8, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 8, 9, 0, 0)
         for i in jump_values: self._jump_queue.put(i)
-        self._jump_x = 3
+        self._jump_x = 6
         self._jump_continue()
 
     def _jump_continue(self):

@@ -14,5 +14,5 @@ class GameScene(SceneBase):
         screen.fill((0, 0, 0))
         screen.blit(self._background, (0, 0))
         pygame.draw.rect(screen, (0, 128, 255),
-                         pygame.Rect(0, 0.63 * screen.get_height(), screen.get_width(), 10))  # draw floor
+                         pygame.Rect(0, 0.63 * screen.get_height(), screen.get_width()*0.72, 10))  # draw floor
 

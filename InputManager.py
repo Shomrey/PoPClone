@@ -4,21 +4,30 @@ import pygame
 class InputManager:
     def __init__(self, player):
         self._player = player
-        self._key_bindings = {
-            pygame.K_UP:    self._jump,
-            pygame.K_DOWN:  self._crouch,
-            pygame.K_LEFT:  self._move_left,
-            pygame.K_RIGHT: self._move_right
-        }
+        self._crouching = False
 
     def on_update(self):
         pressed = pygame.key.get_pressed()
-        if pressed[pygame.K_UP]:    self._key_bindings[pygame.K_UP]()
-        if pressed[pygame.K_DOWN]:  self._key_bindings[pygame.K_DOWN]()
-        if pressed[pygame.K_LEFT]:  self._key_bindings[pygame.K_LEFT]()
-        if pressed[pygame.K_RIGHT]: self._key_bindings[pygame.K_RIGHT]()
 
-    def _jump(self):
+        if pressed[pygame.K_LEFT] and pressed[pygame.K_RIGHT]: pass
+        elif pressed[pygame.K_LEFT]: self._move_left()
+        elif pressed[pygame.K_RIGHT]: self._move_right()
+
+        if pressed[pygame.K_LEFT] and pressed[pygame.K_UP]: self._jump_left()
+        elif pressed[pygame.K_RIGHT] and pressed[pygame.K_UP]: self._jump_right()
+        elif pressed[pygame.K_UP]: self._jump_up()
+
+        if self._crouching:
+            if pressed[pygame.K_DOWN]: self._crouch()
+            else: self._stand_up()
+
+    def _jump_up(self):
+        self._player.set_position_relative(None, -3)
+
+    def _jump_left(self):
+        self._player.set_position_relative(None, -3)
+
+    def _jump_right(self):
         self._player.set_position_relative(None, -3)
 
     def _move_left(self):
@@ -30,4 +39,8 @@ class InputManager:
         self._player.right_movement_animation()
 
     def _crouch(self):
+        self._crouching = True
         self._player.set_position_relative(None, 3)
+
+    def _stand_up(self):
+        self._crouching = False

@@ -17,9 +17,11 @@ class InputManager:
         elif pressed[pygame.K_RIGHT] and pressed[pygame.K_UP]: self._jump_right()
         elif pressed[pygame.K_UP]: self._jump_up()
 
-        if self._crouching:
-            if pressed[pygame.K_DOWN]: self._crouch()
-            else: self._stand_up()
+        if pressed[pygame.K_DOWN]:
+            self._crouch()
+        else:
+            if self._crouching:
+                self._stand_up()
 
     def _jump_up(self):
         self._player.set_position_relative(None, -3)
@@ -40,7 +42,6 @@ class InputManager:
 
     def _crouch(self):
         self._crouching = True
-        self._player.set_position_relative(None, 3)
 
     def _stand_up(self):
         self._crouching = False

@@ -1,6 +1,6 @@
 class SceneBase:
     def __init__(self, resolution):
-        pass
+        self._resolution = resolution
 
     def on_update(self):
         pass

@@ -42,14 +42,14 @@ class Player(pygame.sprite.Sprite):
 
     def right_movement_animation(self):
         self._direction = "Right"
-        self._image = runRight[self._walkCount]
+        self._image = runRight[self._walkCount//3]
         self._walkCount += 1
-        if self._walkCount >= 9:
+        if self._walkCount >= 27:
             self._walkCount = 0
 
     def left_movement_animation(self):
         self._direction = "Left"
-        self._image = runLeft[self._walkCount]
+        self._image = runLeft[self._walkCount//3]
         self._walkCount += 1
-        if self._walkCount >= 9:
+        if self._walkCount >= 27:
             self._walkCount = 0

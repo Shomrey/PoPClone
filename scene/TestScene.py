@@ -33,19 +33,19 @@ class TestScene(SceneBase):
         floors = next((layer.getElementsByTagName('rect') for layer in layers
                      if layer.attributes['inkscape:label'].value == "LEVEL_FLOORS"), [])
 
-        floors = []
-        for layer in layers:
-            if layer.attributes['inkscape:label'].value == "LEVEL_FLOORS":
-                floors = layer.getElementsByTagName('rect')
+        #floors = []
+        #for layer in layers:
+        #    if layer.attributes['inkscape:label'].value == "LEVEL_FLOORS":
+        #        floors = layer.getElementsByTagName('rect')
 
-        self._floors = [TestScene._parse_rect_from_xml(rect) for rect in floors]
+        self._floors = [self._parse_rect_from_xml(rect) for rect in floors]
 
     def on_render(self, screen):
         for rect in self._background:
-            pygame.draw.rect(screen, self._to_screen_rect(rect[1]), rect[0])
+            pygame.draw.rect(screen, rect[1], self._to_screen_rect(rect[0]))
 
         for rect in self._floors:
-            pygame.draw.rect(screen, rect[1], rect[0])
+            pygame.draw.rect(screen, rect[1], self._to_screen_rect(rect[0]))
 
     def _parse_rect_from_xml(self, rect):
         x = float(self._value_parse(rect.attributes['x'].value, 'x'))
@@ -60,9 +60,19 @@ class TestScene(SceneBase):
 
     def _value_parse(self, value_str, dim):
         if '%' in value_str:
-            return float(value_str.replace("%", ""))
-        return float(value_str) / (self._scene_resolution[0] if dim == 'x' else self._scene_resolution[1])
+        #    return float(value_str.replace("%", "")) / 100.0
+            val = float(value_str.replace("%", "")) / 100.0
+            return val * (self._resolution[0] if dim == 'x' else self._resolution[1])
+        # return float(value_str) / (self._scene_resolution[0] if dim == 'x' else self._scene_resolution[1])
+        return float(value_str) / (self._scene_resolution[0] / self._resolution[0]
+                                   if dim == 'x' else
+                                   self._scene_resolution[1] / self._resolution[0])
+        # return float(value_str)
 
     def _to_screen_rect(self, rect):
         """Transforms relative-sized rect to screen sized rect"""
-        raise NotImplementedError()
+        return rect
+        return pygame.Rect(rect.x * self._resolution[0],
+                           rect.y * self._resolution[1],
+                           rect.width * self._resolution[0],
+                           rect.height * self._resolution[1])

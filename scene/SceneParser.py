@@ -1,6 +1,6 @@
 from xml.dom import minidom
 from collections import defaultdict
-from scene.SceneBase import SceneLayer
+from scene.SceneLayer import SceneLayer
 import pygame
 import os
 
@@ -26,14 +26,11 @@ class SceneParser:
         for rect in background:
             geometry[SceneLayer.BACKGROUND].append(SceneParser._parse_rect_from_xml(rect, resolution, scene_resolution))
 
-        # geometry[SceneLayer.BACKGROUND] = background
-
         # Physical scene parsing
         floors = next((layer.getElementsByTagName('rect') for layer in layers
                        if layer.attributes['inkscape:label'].value == "LEVEL_FLOORS"), [])
 
         geometry[SceneLayer.PHYSICAL_SCENE] = [SceneParser._parse_rect_from_xml(rect, resolution, scene_resolution) for rect in floors]
-         # = floors
 
         return geometry
 
@@ -58,5 +55,3 @@ class SceneParser:
         return float(value_str) / (scene_resolution[0] / resolution[0]
                                    if dim == 'x' else
                                    scene_resolution[1] / resolution[1])
-        # return float(value_str)
-

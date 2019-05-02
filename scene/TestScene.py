@@ -1,4 +1,4 @@
-from scene.SceneBase import SceneBase
+from scene.SceneBase import SceneBase, SceneLayer
 from xml.dom import minidom
 import os
 import pygame
@@ -34,6 +34,7 @@ class TestScene(SceneBase):
                      if layer.attributes['inkscape:label'].value == "LEVEL_FLOORS"), [])
 
         self._floors = [self._parse_rect_from_xml(rect) for rect in floors]
+        self._geometry[SceneLayer.PHYSICAL_SCENE] = self._floors
 
     def on_render(self, screen):
         for rect in self._background:

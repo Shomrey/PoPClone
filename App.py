@@ -13,7 +13,7 @@ class App:
         self._player = None
         self._input_manager = None
         self._resolution = (760, 520)
-        self._scene = BasicScene(self._resolution, os.path.join(os.getcwd(), 'res/scenes/test_scene.svg'))
+        self._scene = BasicScene(self._resolution, os.path.join(os.getcwd(), 'res/scenes/first_level.svg'))
 
     def on_init(self):
         self._player = Player()

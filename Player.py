@@ -10,9 +10,9 @@ runLeft = [pygame.transform.scale(pygame.image.load('png/Run/Left_1.png'), (50,7
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, position=[20, 258]):
         pygame.sprite.Sprite.__init__(self)
-        self._position = [20, 258]
+        self._position = position
         self._sprite_size = [50, 70]
         self._image = pygame.transform.scale(pygame.image.load('png/Run/Right_1.png'), self._sprite_size)
         self._direction = "Right"

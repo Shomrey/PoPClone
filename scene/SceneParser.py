@@ -20,11 +20,19 @@ class SceneParser:
 
         layers = xml_file.getElementsByTagName('g')  # 'g' is the tag name for all layers
 
+        # Parse screen borders
+        geometry[SceneLayer.SCREEN_BORDERS] = SceneParser._parse_layer(layers, "SCREEN_BORDERS", resolution, scene_resolution)
+        screen_width = screen_width * (geometry[SceneLayer.SCREEN_BORDERS][1].get_x() - geometry[SceneLayer.SCREEN_BORDERS][0].get_x()) / resolution[0]
+        scene_resolution = (screen_width, screen_height)
+
+        # Parse game elements
+        game_elements = next((layer.getElementsByTagName('g') for layer in layers if layer.attributes['inkscape:label'].value == "GAME_ELEMENTS"), [])
+        geometry[SceneLayer.START_POSITION] = SceneParser._parse_layer(game_elements, "START_POSITION", resolution, scene_resolution)
+
         # Parse all layers
         for layer, layer_name in dict([(SceneLayer.BACKGROUND, "LEVEL_BACKGROUND"),
                                             (SceneLayer.FOREGROUND, "LEVEL_FOREGROUND"),
-                                            (SceneLayer.PHYSICAL_SCENE, "LEVEL_FLOORS"),
-                                            (SceneLayer.SCREEN_BORDERS, "SCREEN_BORDERS")]).items():
+                                            (SceneLayer.PHYSICAL_SCENE, "LEVEL_FLOORS")]).items():
             geometry[layer] = SceneParser._parse_layer(layers, layer_name, resolution, scene_resolution)
 
         return geometry

@@ -6,3 +6,4 @@ class SceneLayer(Enum):
     BACKGROUND = 2
     FOREGROUND = 3
     SCREEN_BORDERS = 4
+    START_POSITION = 5

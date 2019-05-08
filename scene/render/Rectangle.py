@@ -9,3 +9,9 @@ class Rectangle(Renderable):
 
     def on_render(self, screen):
         pygame.draw.rect(screen, self._colour, self._rect)
+
+    def get_x(self):
+        return self._rect.x
+
+    def get_y(self):
+        return self._rect.y

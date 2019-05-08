@@ -1,6 +1,7 @@
 import pygame
 import os
 from scene.BasicScene import BasicScene
+from scene.SceneLayer import SceneLayer
 from Player import Player
 from InputManager import InputManager
 
@@ -16,7 +17,8 @@ class App:
         self._scene = BasicScene(self._resolution, os.path.join(os.getcwd(), 'res/scenes/first_level.svg'))
 
     def on_init(self):
-        self._player = Player()
+        starting_point = self._scene.get_layer(SceneLayer.START_POSITION)[0]
+        self._player = Player([starting_point.get_x(), starting_point.get_y()])
         self._input_manager = InputManager(self._player)
         pygame.init()
         self._screen = pygame.display.set_mode(self._resolution)

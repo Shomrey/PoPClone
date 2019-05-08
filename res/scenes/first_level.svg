@@ -27,10 +27,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="2571.0315"
+     inkscape:cx="1934.0865"
      inkscape:cy="341.08547"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
      inkscape:window-width="2048"
@@ -429,5 +429,22 @@
        width="1"
        id="rect6559"
        style="fill:#ff0000;fill-opacity:1;stroke-width:0.26458332" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="GAME_ELEMENTS">
+    <g
+       inkscape:groupmode="layer"
+       id="layer6"
+       inkscape:label="START_POSITION">
+      <rect
+         style="fill:#00ff00;stroke-width:0.26458332"
+         id="rect865"
+         width="18.142857"
+         height="15.875"
+         x="470.58035"
+         y="125.86607" />
+    </g>
   </g>
 </svg>

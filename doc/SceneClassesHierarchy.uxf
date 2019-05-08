@@ -3,8 +3,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>160</x>
-      <y>210</y>
+      <x>210</x>
+      <y>310</y>
       <w>190</w>
       <h>50</h>
     </coordinates>
@@ -17,8 +17,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>260</x>
-      <y>20</y>
+      <x>310</x>
+      <y>120</y>
       <w>520</w>
       <h>140</h>
     </coordinates>
@@ -29,7 +29,7 @@
 --
 +on_update()
 +on_render(screen)
-+get_layer(layer : SceneLayer) : list&lt;rect&gt;
++get_layer(layer : SceneLayer) : list&lt;(rect, (r,g,b))&gt;
 -_to_screen_rect(rect)
 </panel_attributes>
     <additional_attributes/>
@@ -37,8 +37,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>230</x>
-      <y>150</y>
+      <x>280</x>
+      <y>250</y>
       <w>160</w>
       <h>80</h>
     </coordinates>
@@ -48,8 +48,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
-      <y>200</y>
+      <x>480</x>
+      <y>300</y>
       <w>470</w>
       <h>90</h>
     </coordinates>
@@ -63,8 +63,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>180</x>
-      <y>90</y>
+      <x>230</x>
+      <y>190</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -74,8 +74,8 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>20</x>
-      <y>30</y>
+      <x>70</x>
+      <y>130</y>
       <w>170</w>
       <h>110</h>
     </coordinates>
@@ -89,8 +89,8 @@ SceneLayer
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>510</x>
-      <y>150</y>
+      <x>560</x>
+      <y>250</y>
       <w>100</w>
       <h>70</h>
     </coordinates>

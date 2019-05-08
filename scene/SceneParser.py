@@ -34,6 +34,11 @@ class SceneParser:
 
         return geometry
 
+
+    @staicmethod
+    def _parse_layer(self, layer_name):
+        pass
+
     @staticmethod
     def _parse_rect_from_xml(rect, resolution, scene_resolution):
         """Returns a tuple of form (pygame.Rect, (red, green, blue))"""

@@ -8,4 +8,4 @@ class Rectangle(Renderable):
         self._colour = colour       # (red, green, blue)
 
     def on_render(self, screen):
-        pygame.draw.rect(screen, self._rect, self._colour)
+        pygame.draw.rect(screen, self._colour, self._rect)

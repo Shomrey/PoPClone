@@ -22,7 +22,7 @@ class SceneBase(ABC):
         """Renders all layers stored in _rendered_layers list on the screen"""
         for layer in self._rendered_layers:
             for rect in self._geometry[layer]:
-                pygame.draw.rect(screen, rect[1], rect[0])  # TODO: Abstract out Renderable element
+                rect.on_render(screen)
 
     def get_layer(self, layer):
         """

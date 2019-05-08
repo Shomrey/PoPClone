@@ -1,6 +1,7 @@
 from xml.dom import minidom
 from collections import defaultdict
 from scene.SceneLayer import SceneLayer
+from scene.render.Rectangle import Rectangle
 import pygame
 import os
 
@@ -20,28 +21,24 @@ class SceneParser:
         layers = xml_file.getElementsByTagName('g')  # 'g' is the tag name for all layers
 
         # Background parsing
-        background = next((layer.getElementsByTagName('rect') for layer in layers
-                           if layer.attributes['inkscape:label'].value == "LEVEL_BACKGROUND"), [])
-
-        for rect in background:
-            geometry[SceneLayer.BACKGROUND].append(SceneParser._parse_rect_from_xml(rect, resolution, scene_resolution))
+        geometry[SceneLayer.BACKGROUND] = SceneParser._parse_layer(layers, "LEVEL_BACKGROUND", resolution, scene_resolution)
 
         # Physical scene parsing
-        floors = next((layer.getElementsByTagName('rect') for layer in layers
-                       if layer.attributes['inkscape:label'].value == "LEVEL_FLOORS"), [])
-
-        geometry[SceneLayer.PHYSICAL_SCENE] = [SceneParser._parse_rect_from_xml(rect, resolution, scene_resolution) for rect in floors]
+        geometry[SceneLayer.PHYSICAL_SCENE] = SceneParser._parse_layer(layers, "LEVEL_FLOORS", resolution, scene_resolution)
 
         return geometry
 
+    @staticmethod
+    def _parse_layer(layers, layer_name, resolution, scene_resolution):
+        rectangles = next((layer.getElementsByTagName('rect') for layer in layers
+                           if layer.attributes['inkscape:label'].value == layer_name), [])
 
-    @staicmethod
-    def _parse_layer(self, layer_name):
-        pass
+        return [SceneParser._parse_rect_from_xml(rect, resolution, scene_resolution) for rect in rectangles]
+
 
     @staticmethod
     def _parse_rect_from_xml(rect, resolution, scene_resolution):
-        """Returns a tuple of form (pygame.Rect, (red, green, blue))"""
+        """Returns a Rectangle object parsed from XML data"""
         x = float(SceneParser._value_parse(rect.attributes['x'].value, 'x', resolution, scene_resolution))
         y = float(SceneParser._value_parse(rect.attributes['y'].value, 'y', resolution, scene_resolution))
         width = float(SceneParser._value_parse(rect.attributes['width'].value, 'x', resolution, scene_resolution))
@@ -50,7 +47,7 @@ class SceneParser:
         r = int(color[0:2], 16)
         g = int(color[2:4], 16)
         b = int(color[4:6], 16)
-        return pygame.Rect(x, y, width, height), (r, g, b)
+        return Rectangle(x, y, width, height, (r, g, b))
 
     @staticmethod
     def _value_parse(value_str, dim, resolution, scene_resolution):

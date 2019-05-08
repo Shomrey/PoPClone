@@ -20,11 +20,12 @@ class SceneParser:
 
         layers = xml_file.getElementsByTagName('g')  # 'g' is the tag name for all layers
 
-        # Background parsing
-        geometry[SceneLayer.BACKGROUND] = SceneParser._parse_layer(layers, "LEVEL_BACKGROUND", resolution, scene_resolution)
-
-        # Physical scene parsing
-        geometry[SceneLayer.PHYSICAL_SCENE] = SceneParser._parse_layer(layers, "LEVEL_FLOORS", resolution, scene_resolution)
+        # Parse all layers
+        for layer, layer_name in dict([(SceneLayer.BACKGROUND, "LEVEL_BACKGROUND"),
+                                            (SceneLayer.FOREGROUND, "LEVEL_FOREGROUND"),
+                                            (SceneLayer.PHYSICAL_SCENE, "LEVEL_FLOORS"),
+                                            (SceneLayer.SCREEN_BORDERS, "SCREEN_BORDERS")]).items():
+            geometry[layer] = SceneParser._parse_layer(layers, layer_name, resolution, scene_resolution)
 
         return geometry
 

@@ -12,7 +12,7 @@ class SceneBase(ABC):
         self._geometry = SceneParser.parse(scene_file_path, screen_resolution)
 
         # contains all layers to be rendered on every on_render call
-        self._rendered_layers = [SceneLayer.BACKGROUND, SceneLayer.PHYSICAL_SCENE]
+        self._rendered_layers = [SceneLayer.BACKGROUND, SceneLayer.FOREGROUND]
 
     def on_update(self):
         pass

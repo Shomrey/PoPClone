@@ -32,6 +32,8 @@ death = [pygame.transform.scale(pygame.image.load('png/Death/Dead__000.png'), (w
 
 hearth = pygame.transform.scale(pygame.image.load('png/hearth.svg'), (15, 15))
 
+potion = pygame.transform.scale(pygame.image.load('png/potion.png'), (20, 20))
+
 
 
 class Player(pygame.sprite.Sprite):
@@ -44,18 +46,26 @@ class Player(pygame.sprite.Sprite):
         self._walkCount = 0
         self._inAir = False
         self._health = 3
+        self._edge = 0
+        self._potions = []
 
 
     def on_update(self):
         if self._health <= 0:
             #disable Input Manager
             self.death_animation()
+        if len(self._potions) > 0:
+            if self._position[0]+width//2 > self._potions[0][0] and self._position[0]+width//2 < self._potions[0][0] + 20:
+                self._potions.remove(self._potions[0])
+                self._health += 1
 
     def on_render(self, screen):
         position_rect = self._image.get_rect().move(self._position[0], self._position[1])
         screen.blit(self._image, position_rect)
         for i in range(self._health):
             screen.blit(hearth, [10 + 15*i, 20])
+        for i in range(len(self._potions)):
+            screen.blit(potion, self._potions[i])
 
     def get_position(self):
         return self._position
@@ -74,6 +84,7 @@ class Player(pygame.sprite.Sprite):
 
     def right_movement_animation(self):
         self._direction = "Right"
+        self._edge = 0
         self._image = runRight[self._walkCount//frameSlow]
         self._walkCount += 1
         if self._walkCount >= 9*frameSlow:
@@ -81,6 +92,7 @@ class Player(pygame.sprite.Sprite):
 
     def left_movement_animation(self):
         self._direction = "Left"
+        self._edge = 0
         self._image = runLeft[self._walkCount//frameSlow]
         self._walkCount += 1
         if self._walkCount >= 9*frameSlow:
@@ -103,6 +115,8 @@ class Player(pygame.sprite.Sprite):
             while timer != 0:
                 timer -= 1
             self._image = attackRight[self._walkCount]
+            if self._walkCount >= 3:
+                self._edge = width + attackWidth + self._position[0]
             self._walkCount += 1
             if self._walkCount >= 9:
                 self._walkCount = 0
@@ -111,6 +125,8 @@ class Player(pygame.sprite.Sprite):
             while timer != 0:
                 timer -= 1
             self._image = attackLeft[self._walkCount]
+            if self._walkCount >= 3:
+                self._edge = self._position[0] - attackWidth
             self._walkCount += 1
             if self._walkCount >= 9:
                 self._walkCount = 0
@@ -129,3 +145,6 @@ class Player(pygame.sprite.Sprite):
 
     def get_health(self):
         return self._health
+
+    def get_edge(self):
+        return self._edge

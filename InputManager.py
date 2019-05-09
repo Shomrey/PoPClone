@@ -23,15 +23,16 @@ class InputManager:
         self._player_rect_top = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1], 50, 20)
         self._player_rect_bot = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1] + 50, 50, 20)
 
-        if self._player_rect_top.collidelist(self._scene_floors) < 0:
-            print("No collision detected")
-        else:
-            print("Collide top!")
+        if self._player_rect_top.collidelist(self._scene_floors) >= 0:
+            while not self._jump_queue.empty(): self._jump_queue.get()
+            jump_values = (-8, -7, -6)
+            for i in jump_values: self._jump_queue.put(i)
+            self._jump_queue.put(-9)
 
         if self._player_rect_bot.collidelist(self._scene_floors) < 0:
-            print("No floor detected")
+            self._jump_queue.put(9)
         else:
-            print("There's a floor!")
+            while not self._jump_queue.empty(): self._jump_queue.get()
 
         if not self._jump_queue.empty():
             pressed = self._none_pressed
@@ -62,13 +63,13 @@ class InputManager:
         self._jump_continue()
 
     def _jump_left(self):
-        jump_values = (-9, -8, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 8, 9, 0, 0)  # 33
+        jump_values = (-9, -8, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 8, 9)  # 33
         for i in jump_values: self._jump_queue.put(i)
         self._jump_x = -6
         self._jump_continue()
 
     def _jump_right(self):
-        jump_values = (-9, -8, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 8, 9, 0, 0)
+        jump_values = (-9, -8, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 8, 9)
         for i in jump_values: self._jump_queue.put(i)
         self._jump_x = 6
         self._jump_continue()

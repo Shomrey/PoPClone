@@ -9,7 +9,10 @@ class SceneBase(ABC):
         self._screen_resolution = screen_resolution
 
         # contains all parsed geometry as well as the physical scene
-        self._geometry = SceneParser.parse(scene_file_path, screen_resolution)
+        self._geometry, scene_resolution = SceneParser.parse(scene_file_path)
+        screenshot_width = self.get_layer(SceneLayer.SCREEN_BORDERS)[1].get_x() - self.get_layer(SceneLayer.SCREEN_BORDERS)[0].get_x()  # TODO: Handle uneven screenshots
+        self._screenshot_resolution = (screenshot_width, scene_resolution[1])
+        self._current_screenshot = self.get_screenshot_number(self.get_layer(SceneLayer.START_POSITION)[0].get_x())
 
         # contains all layers to be rendered on every on_render call
         self._rendered_layers = [SceneLayer.BACKGROUND, SceneLayer.FOREGROUND]
@@ -20,9 +23,11 @@ class SceneBase(ABC):
     @abstractmethod
     def on_render(self, screen):
         """Renders all layers stored in _rendered_layers list on the screen"""
+        # screenshot_number = self.get_screenshot_number(player_position.x)
+
         for layer in self._rendered_layers:
             for rect in self._geometry[layer]:
-                rect.on_render(screen)
+                rect.on_render(screen, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot)
 
     def get_layer(self, layer):
         """
@@ -32,9 +37,5 @@ class SceneBase(ABC):
         """
         return self._geometry[layer]
 
-    def _to_screen_rect(self, rect):
-        """Transforms relative-sized rect to screen sized rect"""
-        return pygame.Rect(rect.x * self._screen_resolution[0],
-                           rect.y * self._screen_resolution[1],
-                           rect.width * self._screen_resolution[0],
-                           rect.height * self._screen_resolution[1])
+    def get_screenshot_number(self, x):
+        return x // self._screenshot_resolution[0]

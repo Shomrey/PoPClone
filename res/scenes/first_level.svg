@@ -10,9 +10,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="4800"
-   height="900"
-   viewBox="0 0 1270 238.12501"
+   width="1272.203"
+   height="238.40442"
+   viewBox="0 0 1272.203 238.40442"
    version="1.1"
    id="svg836"
    sodipodi:docname="first_level.svg"
@@ -26,18 +26,35 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="1934.0865"
-     inkscape:cy="341.08547"
-     inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:zoom="1.979899"
+     inkscape:cx="385.02447"
+     inkscape:cy="56.809673"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer4"
      showgrid="false"
      units="px"
-     inkscape:window-width="2048"
-     inkscape:window-height="1076"
+     inkscape:window-width="1600"
+     inkscape:window-height="824"
      inkscape:window-x="0"
      inkscape:window-y="0"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0">
+    <sodipodi:guide
+       position="1272.203,238.40443"
+       orientation="0,1"
+       id="guide154"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="1272.203,6.4393763e-06"
+       orientation="1,0"
+       id="guide156"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
   <metadata
      id="metadata833">
     <rdf:RDF>
@@ -53,29 +70,57 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="LEVEL_BACKGROUND">
+     inkscape:label="LEVEL_BACKGROUND"
+     transform="translate(0,0.27941838)">
     <rect
-       style="fill:#00002c;stroke-width:0.26458332;fill-opacity:1"
-       id="rect1384"
-       width="1272.203"
-       height="238.40442"
+       y="-0.27941838"
        x="0"
-       y="-0.27941838" />
+       height="238.40442"
+       width="1272.203"
+       id="rect1384"
+       style="fill:#00002c;fill-opacity:1;stroke-width:0.26458332" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_background.png"
+       xlink:href="elements/brick_background.png"
+       y="116.36652"
+       x="515.41748"
+       id="image6575"
+       preserveAspectRatio="none"
+       height="35.866039"
+       width="26.16111" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_background.png"
+       xlink:href="elements/brick_background.png"
+       width="26.16111"
+       height="35.866039"
+       preserveAspectRatio="none"
+       id="image6553"
+       x="631.83459"
+       y="74.033203" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_background.png"
+       xlink:href="elements/brick_background.png"
+       y="73.504036"
+       x="586.32422"
+       id="image6550"
+       preserveAspectRatio="none"
+       height="35.866039"
+       width="26.16111" />
     <image
        sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/window.png"
        xlink:href="elements/window.png"
        width="20.713095"
        height="45.309898"
        preserveAspectRatio="none"
-       id="image6483"
-       x="497.51852"
-       y="66.439751" />
+       id="image6486"
+       x="538.36127"
+       y="67.006714" />
     <image
        sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/window.png"
        xlink:href="elements/window.png"
-       y="67.006714"
-       x="538.36127"
-       id="image6486"
+       y="66.439751"
+       x="497.51852"
+       id="image6483"
        preserveAspectRatio="none"
        height="45.309898"
        width="20.713095" />
@@ -85,51 +130,15 @@
        width="26.16111"
        height="35.866039"
        preserveAspectRatio="none"
-       id="image6550"
-       x="586.32422"
-       y="73.504036" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_background.png"
-       xlink:href="elements/brick_background.png"
-       y="74.033203"
-       x="631.83459"
-       id="image6553"
-       preserveAspectRatio="none"
-       height="35.866039"
-       width="26.16111" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_background.png"
-       xlink:href="elements/brick_background.png"
-       width="26.16111"
-       height="35.866039"
-       preserveAspectRatio="none"
-       id="image6575"
-       x="515.41748"
-       y="116.36652" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_background.png"
-       xlink:href="elements/brick_background.png"
-       y="21.116549"
-       x="446.62595"
        id="image6577"
-       preserveAspectRatio="none"
-       height="35.866039"
-       width="26.16111" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_background.png"
-       xlink:href="elements/brick_background.png"
-       width="26.16111"
-       height="35.866039"
-       preserveAspectRatio="none"
-       id="image6579"
-       x="303.75122"
+       x="446.62595"
        y="21.116549" />
     <image
        sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_background.png"
        xlink:href="elements/brick_background.png"
        y="21.116549"
-       x="790.58521"
-       id="image6581"
+       x="303.75122"
+       id="image6579"
        preserveAspectRatio="none"
        height="35.866039"
        width="26.16111" />
@@ -139,247 +148,258 @@
        width="26.16111"
        height="35.866039"
        preserveAspectRatio="none"
-       id="image6583"
+       id="image6581"
+       x="790.58521"
+       y="21.116549" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_background.png"
+       xlink:href="elements/brick_background.png"
+       y="47.574883"
        x="891.12726"
-       y="47.574883" />
+       id="image6583"
+       preserveAspectRatio="none"
+       height="35.866039"
+       width="26.16111" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="LEVEL_FLOORS">
+     inkscape:label="LEVEL_FLOORS"
+     transform="translate(0,0.27941838)">
     <rect
-       style="fill:#808080;fill-opacity:1;stroke-width:0.2283219"
-       id="rect6561"
-       width="159.29263"
-       height="74.835464"
-       x="419.10001"
-       y="163.28955" />
-    <rect
-       y="163.8241"
-       x="644.69684"
-       height="74.300926"
-       width="193.50313"
-       id="rect6563"
-       style="fill:#808080;fill-opacity:1;stroke-width:0.25074777" />
-    <rect
-       style="fill:#808080;fill-opacity:1;stroke-width:0.26458332"
-       id="rect6567"
-       width="137.37653"
-       height="14.967093"
+       y="99.144844"
        x="701.31525"
-       y="99.144844" />
+       height="14.967093"
+       width="137.37653"
+       id="rect6567"
+       style="fill:#808080;fill-opacity:1;stroke-width:0.26458332" />
     <rect
-       style="fill:#808080;fill-opacity:1;stroke-width:0.26458332"
-       id="rect6569"
-       width="141.1183"
-       height="151.27455"
-       x="279.02939"
-       y="86.850449" />
+       style="fill:#808080;fill-opacity:1;stroke-width:0.25074777"
+       id="rect6563"
+       width="193.50313"
+       height="74.300926"
+       x="644.69684"
+       y="163.8241" />
     <rect
-       style="fill:#808080;fill-opacity:1;stroke-width:0.26458332"
-       id="rect6571"
-       width="28.373281"
-       height="57.195705"
-       x="809.82666"
-       y="106.62839" />
-    <rect
-       style="fill:#808080;fill-opacity:1;stroke-width:0.26458332"
-       id="rect6573"
-       width="120.27129"
-       height="139.51469"
+       y="99.144844"
        x="838.69177"
-       y="99.144844" />
+       height="139.51469"
+       width="120.27129"
+       id="rect6573"
+       style="fill:#808080;fill-opacity:1;stroke-width:0.26458332" />
+    <rect
+       y="163.28955"
+       x="419.10001"
+       height="74.835464"
+       width="159.29263"
+       id="rect6561"
+       style="fill:#808080;fill-opacity:1;stroke-width:0.2283219" />
+    <rect
+       y="106.62839"
+       x="809.82666"
+       height="57.195705"
+       width="28.373281"
+       id="rect6571"
+       style="fill:#808080;fill-opacity:1;stroke-width:0.26458332" />
+    <rect
+       y="86.850449"
+       x="279.02939"
+       height="151.27455"
+       width="141.1183"
+       id="rect6569"
+       style="fill:#808080;fill-opacity:1;stroke-width:0.26458332" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer5"
-     inkscape:label="LEVEL_FOREGROUND">
+     inkscape:label="LEVEL_FOREGROUND"
+     transform="translate(0,0.27941838)">
     <image
        sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
        xlink:href="elements/floor.png"
-       y="148.69975"
-       x="420.9884"
+       width="52.366684"
+       height="14.322511"
+       preserveAspectRatio="none"
        id="image6704"
-       preserveAspectRatio="none"
-       height="14.322511"
-       width="52.366684" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall_side.png"
-       xlink:href="elements/brick_wall_side.png"
-       y="148.69975"
-       x="577.04303"
-       id="image6828"
-       preserveAspectRatio="none"
-       height="59.525654"
-       width="25.20488" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
-       xlink:href="elements/brick_wall.png"
-       width="44.450001"
-       height="44.450001"
-       preserveAspectRatio="none"
-       id="image6693"
-       x="533.94263"
-       y="163.28955" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
-       xlink:href="elements/brick_wall.png"
-       width="44.450001"
-       height="44.450001"
-       preserveAspectRatio="none"
-       id="image6742"
-       x="489.49261"
-       y="163.28955" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
-       xlink:href="elements/brick_wall.png"
-       width="44.450001"
-       height="44.450001"
-       preserveAspectRatio="none"
-       id="image6744"
-       x="445.0426"
-       y="163.28955" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
-       xlink:href="elements/brick_wall.png"
-       y="163.28955"
-       x="400.59259"
-       id="image6746"
-       preserveAspectRatio="none"
-       height="44.450001"
-       width="44.450001" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
-       xlink:href="elements/brick_wall.png"
-       width="44.450001"
-       height="44.450001"
-       preserveAspectRatio="none"
-       id="image6748"
-       x="533.94263"
-       y="207.73955" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
-       xlink:href="elements/brick_wall.png"
-       y="207.73955"
-       x="489.49261"
-       id="image6750"
-       preserveAspectRatio="none"
-       height="44.450001"
-       width="44.450001" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
-       xlink:href="elements/brick_wall.png"
-       width="44.450001"
-       height="44.450001"
-       preserveAspectRatio="none"
-       id="image6752"
-       x="445.0426"
-       y="207.73955" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
-       xlink:href="elements/brick_wall.png"
-       y="207.73955"
-       x="400.59259"
-       id="image6754"
-       preserveAspectRatio="none"
-       height="44.450001"
-       width="44.450001" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
-       xlink:href="elements/floor.png"
-       width="52.366684"
-       height="14.322511"
-       preserveAspectRatio="none"
-       id="image6758"
-       x="450.24469"
+       x="420.9884"
        y="148.69975" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
-       xlink:href="elements/floor.png"
-       y="148.69975"
-       x="480.03015"
-       id="image6760"
-       preserveAspectRatio="none"
-       height="14.322511"
-       width="52.366684" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
-       xlink:href="elements/floor.png"
-       width="52.366684"
-       height="14.322511"
-       preserveAspectRatio="none"
-       id="image6763"
-       x="509.66394"
-       y="148.69975" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
-       xlink:href="elements/floor.png"
-       y="148.69975"
-       x="538.76855"
-       id="image6765"
-       preserveAspectRatio="none"
-       height="14.322511"
-       width="52.366684" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
-       xlink:href="elements/floor.png"
-       width="52.366684"
-       height="14.322511"
-       preserveAspectRatio="none"
-       id="image6767"
-       x="549.88123"
-       y="148.69975" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall_side.png"
-       xlink:href="elements/brick_wall_side.png"
-       y="195.57666"
-       x="578.10138"
-       id="image6834"
-       preserveAspectRatio="none"
-       height="56.558228"
-       width="23.962433" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall_side.png"
-       xlink:href="elements/brick_wall_side.png"
-       y="100.01646"
-       x="418.29297"
-       id="image6836"
-       preserveAspectRatio="none"
-       height="59.525654"
-       width="25.20488" />
     <image
        sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall_side.png"
        xlink:href="elements/brick_wall_side.png"
        width="25.20488"
        height="59.525654"
        preserveAspectRatio="none"
-       id="image6838"
+       id="image6828"
+       x="577.04303"
+       y="148.69975" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
+       xlink:href="elements/brick_wall.png"
+       y="163.28955"
+       x="489.49261"
+       id="image6742"
+       preserveAspectRatio="none"
+       height="44.450001"
+       width="44.450001" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
+       xlink:href="elements/brick_wall.png"
+       y="163.28955"
+       x="445.0426"
+       id="image6744"
+       preserveAspectRatio="none"
+       height="44.450001"
+       width="44.450001" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
+       xlink:href="elements/brick_wall.png"
+       width="44.450001"
+       height="44.450001"
+       preserveAspectRatio="none"
+       id="image6746"
+       x="400.59259"
+       y="163.28955" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
+       xlink:href="elements/brick_wall.png"
+       y="207.73955"
+       x="533.94263"
+       id="image6748"
+       preserveAspectRatio="none"
+       height="44.450001"
+       width="44.450001" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
+       xlink:href="elements/brick_wall.png"
+       y="207.73955"
+       x="445.0426"
+       id="image6752"
+       preserveAspectRatio="none"
+       height="44.450001"
+       width="44.450001" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
+       xlink:href="elements/brick_wall.png"
+       width="44.450001"
+       height="44.450001"
+       preserveAspectRatio="none"
+       id="image6750"
+       x="489.49261"
+       y="207.73955" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
+       xlink:href="elements/brick_wall.png"
+       width="44.450001"
+       height="44.450001"
+       preserveAspectRatio="none"
+       id="image6754"
+       x="400.59259"
+       y="207.73955" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
+       xlink:href="elements/floor.png"
+       y="148.69975"
+       x="450.24469"
+       id="image6758"
+       preserveAspectRatio="none"
+       height="14.322511"
+       width="52.366684" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
+       xlink:href="elements/floor.png"
+       y="148.69975"
+       x="549.88123"
+       id="image6767"
+       preserveAspectRatio="none"
+       height="14.322511"
+       width="52.366684" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
+       xlink:href="elements/floor.png"
+       width="52.366684"
+       height="14.322511"
+       preserveAspectRatio="none"
+       id="image6760"
+       x="480.03015"
+       y="148.69975" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
+       xlink:href="elements/floor.png"
+       y="148.69975"
+       x="509.66394"
+       id="image6763"
+       preserveAspectRatio="none"
+       height="14.322511"
+       width="52.366684" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall_side.png"
+       xlink:href="elements/brick_wall_side.png"
+       width="23.962433"
+       height="56.558228"
+       preserveAspectRatio="none"
+       id="image6834"
+       x="578.10138"
+       y="195.57666" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall_side.png"
+       xlink:href="elements/brick_wall_side.png"
+       width="25.20488"
+       height="59.525654"
+       preserveAspectRatio="none"
+       id="image6836"
        x="418.29297"
-       y="76.203934" />
+       y="100.01646" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall_side.png"
+       xlink:href="elements/brick_wall_side.png"
+       y="76.203934"
+       x="418.29297"
+       id="image6838"
+       preserveAspectRatio="none"
+       height="59.525654"
+       width="25.20488" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/brick_wall.png"
+       xlink:href="elements/brick_wall.png"
+       y="163.28955"
+       x="533.94263"
+       id="image6693"
+       preserveAspectRatio="none"
+       height="44.450001"
+       width="44.450001" />
     <image
        sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
        xlink:href="elements/floor.png"
-       y="74.616432"
-       x="280.00653"
+       width="52.366684"
+       height="14.322511"
+       preserveAspectRatio="none"
        id="image6840"
-       preserveAspectRatio="none"
-       height="14.322511"
-       width="52.366684" />
+       x="280.00653"
+       y="74.616432" />
     <image
        sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
        xlink:href="elements/floor.png"
        width="52.366684"
        height="14.322511"
        preserveAspectRatio="none"
-       id="image6842"
-       x="306.46481"
-       y="74.616432" />
+       id="image6765"
+       x="538.76855"
+       y="148.69975" />
     <image
        sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
        xlink:href="elements/floor.png"
-       y="74.616432"
-       x="332.9231"
+       width="52.366684"
+       height="14.322511"
+       preserveAspectRatio="none"
        id="image6844"
+       x="332.9231"
+       y="74.616432" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
+       xlink:href="elements/floor.png"
+       y="74.616432"
+       x="306.46481"
+       id="image6842"
        preserveAspectRatio="none"
        height="14.322511"
        width="52.366684" />
@@ -389,24 +409,24 @@
        width="52.366684"
        height="14.322511"
        preserveAspectRatio="none"
-       id="image6846"
-       x="359.38138"
+       id="image6848"
+       x="380.548"
+       y="74.616432" />
+    <image
+       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
+       xlink:href="elements/floor.png"
+       width="52.366684"
+       height="14.322511"
+       preserveAspectRatio="none"
+       id="image6850"
+       x="391.13132"
        y="74.616432" />
     <image
        sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
        xlink:href="elements/floor.png"
        y="74.616432"
-       x="380.548"
-       id="image6848"
-       preserveAspectRatio="none"
-       height="14.322511"
-       width="52.366684" />
-    <image
-       sodipodi:absref="/home/jawi/Documents/School/Python/PoPClone/res/scenes/elements/floor.png"
-       xlink:href="elements/floor.png"
-       y="74.616432"
-       x="391.13132"
-       id="image6850"
+       x="359.38138"
+       id="image6846"
        preserveAspectRatio="none"
        height="14.322511"
        width="52.366684" />
@@ -414,37 +434,42 @@
   <g
      inkscape:groupmode="layer"
      id="layer4"
-     inkscape:label="SCREEN_BORDERS">
+     inkscape:label="SCREEN_BORDERS"
+     transform="translate(0,0.27941838)">
+    <rect
+       y="-2.0678016e-08"
+       x="419.10001"
+       height="100%"
+       width="1"
+       id="rect6557"
+       style="fill:#ff0000;fill-opacity:1;stroke-width:0.26458332" />
     <rect
        style="fill:#ff0000;fill-opacity:1;stroke-width:0.26458332"
-       id="rect6557"
-       width="1"
-       height="100%"
-       x="33%"
-       y="0" />
-    <rect
-       y="0"
-       x="66%"
-       height="100%"
-       width="1"
        id="rect6559"
-       style="fill:#ff0000;fill-opacity:1;stroke-width:0.26458332" />
+       width="1"
+       height="100%"
+       x="838.20001"
+       y="-2.0678016e-08" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer1"
-     inkscape:label="GAME_ELEMENTS">
+     inkscape:label="GAME_ELEMENTS"
+     transform="translate(0,0.27941838)">
     <g
        inkscape:groupmode="layer"
        id="layer6"
        inkscape:label="START_POSITION">
-      <rect
-         style="fill:#00ff00;stroke-width:0.26458332"
-         id="rect865"
-         width="18.142857"
-         height="15.875"
-         x="470.58035"
-         y="125.86607" />
+      <g
+         id="g148">
+        <rect
+           y="125.86607"
+           x="470.58035"
+           height="15.875"
+           width="18.142857"
+           id="rect865"
+           style="fill:#00ff00;stroke-width:0.26458332" />
+      </g>
     </g>
   </g>
 </svg>

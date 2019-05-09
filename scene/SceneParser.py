@@ -8,61 +8,68 @@ import os
 
 class SceneParser:
     @staticmethod
-    def parse(scene_file_path, resolution):
+    def parse(scene_file_path):
+        """
+        Parse all elements of the scene in the given file.
+
+        Each layer is a list of Renderable objects. The objects' dimensions are absolute pixels values
+        characterizing the original image. They have to be converted to proper on-screen values.
+        Each scene consists of multiple screenshots-part of the scene between two screen borders.
+        Ergo: one file-one scene-multiple screenshots.
+        :param scene_file_path: path to the scene to parse
+        :param resolution: [deprecated] actual screen resolution
+        :return: a dictionary of geometry layers and scene resolution in pixels
+        """
         geometry = defaultdict(lambda: [])
 
         xml_file = minidom.parse(os.path.abspath(scene_file_path))
 
         root = xml_file.getElementsByTagName('svg')[0]
-        screen_width = float(root.attributes['width'].value)
-        screen_height = float(root.attributes['height'].value)
-        scene_resolution = (screen_width, screen_height)
+        scene_width = float(root.attributes['width'].value)
+        scene_height = float(root.attributes['height'].value)
+        scene_resolution = (scene_width, scene_height)
 
-        layers = xml_file.getElementsByTagName('g')  # 'g' is the tag name for all layers
+        layers = xml_file.getElementsByTagName('g')  # 'g' is the tag name for a layer
 
-        # Parse screen borders
-        geometry[SceneLayer.SCREEN_BORDERS] = SceneParser._parse_layer(layers, "SCREEN_BORDERS", resolution, scene_resolution)
-        screen_width = screen_width * (geometry[SceneLayer.SCREEN_BORDERS][1].get_x() - geometry[SceneLayer.SCREEN_BORDERS][0].get_x()) / resolution[0]
-        scene_resolution = (screen_width, screen_height)
-
-        # Parse game elements
+        # Parse game elements from sublayers of GAME_ELEMENTS layer
         game_elements = next((layer.getElementsByTagName('g') for layer in layers if layer.attributes['inkscape:label'].value == "GAME_ELEMENTS"), [])
-        geometry[SceneLayer.START_POSITION] = SceneParser._parse_layer(game_elements, "START_POSITION", resolution, scene_resolution)
+        geometry[SceneLayer.START_POSITION] = SceneParser._parse_layer(game_elements, "START_POSITION", scene_resolution)
 
-        # Parse all layers
+        # Parse the rest of the layers
         for layer, layer_name in dict([(SceneLayer.BACKGROUND, "LEVEL_BACKGROUND"),
-                                            (SceneLayer.FOREGROUND, "LEVEL_FOREGROUND"),
-                                            (SceneLayer.PHYSICAL_SCENE, "LEVEL_FLOORS")]).items():
-            geometry[layer] = SceneParser._parse_layer(layers, layer_name, resolution, scene_resolution)
+                                        (SceneLayer.FOREGROUND, "LEVEL_FOREGROUND"),
+                                        (SceneLayer.PHYSICAL_SCENE, "LEVEL_FLOORS"),
+                                        (SceneLayer.SCREEN_BORDERS, "SCREEN_BORDERS")]).items():
+            geometry[layer] = SceneParser._parse_layer(layers, layer_name, scene_resolution)
 
-        return geometry
+        return geometry, scene_resolution
 
     @staticmethod
-    def _parse_layer(layers, layer_name, resolution, scene_resolution):
+    def _parse_layer(layers, layer_name, scene_resolution):
         rectangle_xmls = next((layer.getElementsByTagName('rect') for layer in layers
                            if layer.attributes['inkscape:label'].value == layer_name), [])
 
-        rectangles = [SceneParser._parse_rect_from_xml(rect, resolution, scene_resolution) for rect in rectangle_xmls]
+        rectangles = [SceneParser._parse_rect_from_xml(rect, scene_resolution) for rect in rectangle_xmls]
 
         image_xmls = next((layer.getElementsByTagName('image') for layer in layers
                            if layer.attributes['inkscape:label'].value == layer_name), [])
 
-        images = [SceneParser._parse_image_from_xml(image, resolution, scene_resolution) for image in image_xmls]
+        images = [SceneParser._parse_image_from_xml(image, scene_resolution) for image in image_xmls]
 
         return rectangles + images
 
     @staticmethod
-    def _parse_dimensions_from_xml(xml_element, resolution, scene_resolution):
-        x = float(SceneParser._parse_value(xml_element.attributes['x'].value, 'x', resolution, scene_resolution))
-        y = float(SceneParser._parse_value(xml_element.attributes['y'].value, 'y', resolution, scene_resolution))
-        width = float(SceneParser._parse_value(xml_element.attributes['width'].value, 'x', resolution, scene_resolution))
-        height = float(SceneParser._parse_value(xml_element.attributes['height'].value, 'y', resolution, scene_resolution))
+    def _parse_dimensions_from_xml(xml_element, scene_resolution):
+        x = float(SceneParser._parse_value(xml_element.attributes['x'].value, 'x', scene_resolution))
+        y = float(SceneParser._parse_value(xml_element.attributes['y'].value, 'y', scene_resolution))
+        width = float(SceneParser._parse_value(xml_element.attributes['width'].value, 'x', scene_resolution))
+        height = float(SceneParser._parse_value(xml_element.attributes['height'].value, 'y', scene_resolution))
         return x, y, width, height
 
     @staticmethod
-    def _parse_rect_from_xml(rect, resolution, scene_resolution):
+    def _parse_rect_from_xml(rect, scene_resolution):
         """Returns a Rectangle object parsed from XML data"""
-        x, y, width, height = SceneParser._parse_dimensions_from_xml(rect, resolution, scene_resolution)
+        x, y, width, height = SceneParser._parse_dimensions_from_xml(rect, scene_resolution)
         color = rect.attributes['style'].value[6:12]
         r = int(color[0:2], 16)
         g = int(color[2:4], 16)
@@ -70,17 +77,15 @@ class SceneParser:
         return Rectangle(x, y, width, height, (r, g, b))
 
     @staticmethod
-    def _parse_image_from_xml(image, resolution, scene_resolution):
+    def _parse_image_from_xml(image, scene_resolution):
         """Returns an Image object parsed from XML data"""
-        x, y, width, height = SceneParser._parse_dimensions_from_xml(image, resolution, scene_resolution)
+        x, y, width, height = SceneParser._parse_dimensions_from_xml(image, scene_resolution)
         filename = os.path.join("res/scenes/elements", os.path.split(image.attributes['xlink:href'].value)[1])
         return Image(x, y, width, height, filename)
 
     @staticmethod
-    def _parse_value(value_str, dim, resolution, scene_resolution):
+    def _parse_value(value_str, dim,  scene_resolution):
         if '%' in value_str:
             relative_value = float(value_str.replace("%", "")) / 100.0
-            return relative_value * (resolution[0] if dim == 'x' else resolution[1])
-        return float(value_str) / (scene_resolution[0] / resolution[0]
-                                   if dim == 'x' else
-                                   scene_resolution[1] / resolution[1])
+            return relative_value * (scene_resolution[0] if dim == 'x' else scene_resolution[1])
+        return float(value_str)

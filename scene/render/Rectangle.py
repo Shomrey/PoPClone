@@ -16,3 +16,6 @@ class Rectangle(Renderable):
     def get_y(self):
         return self._rect.y
 
+    def get_rect(self):
+        return self._rect
+

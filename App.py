@@ -17,12 +17,14 @@ class App:
         self._scene = BasicScene(self._resolution, os.path.join(os.getcwd(), 'res/scenes/first_level.svg'))
 
     def on_init(self):
-        starting_point = self._scene.get_layer(SceneLayer.START_POSITION)[0]
-        self._player = Player([starting_point.get_x(), starting_point.get_y()])
-        self._input_manager = InputManager(self._player)
         pygame.init()
         self._screen = pygame.display.set_mode(self._resolution)
         self._clock = pygame.time.Clock()
+        # starting_point = self._scene.get_layer(SceneLayer.START_POSITION)[0]
+        starting_point = self._scene.get_start_position(self._screen.get_rect())
+        # self._player = Player([starting_point.get_x(), starting_point.get_y()])
+        self._player = Player(starting_point)
+        self._input_manager = InputManager(self._player)
 
     def on_execute(self):
         if self.on_init() is False:

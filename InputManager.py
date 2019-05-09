@@ -5,6 +5,13 @@ import queue
 class InputManager:
     def __init__(self, player):
         self._player = player
+        self._player_rect_top = 0  # ?
+        self._player_rect_bot = 0
+        self._scene_resolution = (760, 520)
+        self._scene_floors = [pygame.Rect(380, 312, 380, 26),
+                              pygame.Rect(608, 104, 152, 26),
+                              pygame.Rect(0, 416, 760, 26),
+                              pygame.Rect(608, 208, 152, 26)]
         self._jump_queue = queue.Queue()
         self._jump_x = 0
         self._crouching = False
@@ -12,6 +19,19 @@ class InputManager:
 
     def on_update(self):
         pressed = pygame.key.get_pressed()
+
+        self._player_rect_top = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1], 50, 20)
+        self._player_rect_bot = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1] + 50, 50, 20)
+
+        if self._player_rect_top.collidelist(self._scene_floors) < 0:
+            print("No collision detected")
+        else:
+            print("Collide top!")
+
+        if self._player_rect_bot.collidelist(self._scene_floors) < 0:
+            print("No floor detected")
+        else:
+            print("There's a floor!")
 
         if not self._jump_queue.empty():
             pressed = self._none_pressed

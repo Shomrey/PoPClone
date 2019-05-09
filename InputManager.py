@@ -31,14 +31,18 @@ class InputManager:
             if self._crouching:
                 self._stand_up()
 
+        if self._player.get_position()[0] < 0:
+            self._player.set_position(0, None)
+            self._jump_x = 0
+
     def _jump_up(self):
-        jump_values = (-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0)
+        jump_values = (-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0)  # 45
         for i in jump_values: self._jump_queue.put(i)
         self._jump_x = 0
         self._jump_continue()
 
     def _jump_left(self):
-        jump_values = (-9, -8, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 8, 9, 0, 0)
+        jump_values = (-9, -8, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 8, 9, 0, 0)  # 33
         for i in jump_values: self._jump_queue.put(i)
         self._jump_x = -6
         self._jump_continue()

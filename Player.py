@@ -48,19 +48,22 @@ class Player(pygame.sprite.Sprite):
         self._health = 3
         self._edge = 0
         self._potions = []
-        self._trap = [850,258]
+        self._traps = []
 
 
     def on_update(self):
         if self._health <= 0:
             #disable Input Manager
             self.death_animation()
-        if self._position[0]+width//2 == self._trap[0]:
-            self._health = 0
         if len(self._potions) > 0:
-            if self._position[0]+width//2 > self._potions[0][0] and self._position[0]+width//2 < self._potions[0][0] + 20:
-                self._potions.remove(self._potions[0])
-                self._health += 1
+            for i in self._potions:
+                if i[0] < self._position[0]+width//2 < i[0] + 20 and i[1] >= self._position[1] >= i[1] - 20:
+                    self._potions.remove(i)
+                    self._health += 1
+        if len(self._traps) > 0:
+            for i in self._traps:
+                if i[0] < self._position[0]+width//2 < i[0] + 20 and i[1] == self._position[1]:
+                    self._health = 0
 
     def on_render(self, screen):
         position_rect = self._image.get_rect().move(self._position[0], self._position[1])

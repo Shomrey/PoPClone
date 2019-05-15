@@ -16,6 +16,7 @@ attackLeft = [pygame.transform.scale(pygame.image.load('png/EnemyAttack/Left_Att
                pygame.transform.scale(pygame.image.load('png/EnemyAttack/Left_Attack_4.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/EnemyAttack/Left_Attack_5.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/EnemyAttack/Left_Attack_6.png'), (width+attackWidth,height)),
                pygame.transform.scale(pygame.image.load('png/EnemyAttack/Left_Attack_7.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/EnemyAttack/Left_Attack_8.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/EnemyAttack/Left_Attack_9.png'), (width+attackWidth,height))]
 
+
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, player, position):
         pygame.sprite.Sprite.__init__(self)

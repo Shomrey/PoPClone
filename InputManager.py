@@ -52,6 +52,9 @@ class InputManager:
             if self._crouching:
                 self._stand_up()
 
+        if pressed[pygame.K_SPACE]:
+            self._attack()
+
         if self._player.get_position()[0] < 0:
             self._player.set_position(0, None)
             self._jump_x = 0

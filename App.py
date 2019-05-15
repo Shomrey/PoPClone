@@ -27,6 +27,7 @@ class App:
         self.add_potion(self._player, [300,308])
         self.spawn_enemy(self._player, [500, 258])
         self.add_potion(self._player, [550,308])
+        self.create_trap(self._player, [800, 258])
 
 
     def on_execute(self):
@@ -69,6 +70,9 @@ class App:
         enemy = Enemy(player, position)
         self._enemies.append(enemy)
         self._number_of_enemies += 1
+
+    def create_trap(self, player, position):
+        player._traps.append(position)
 
     def add_potion(self, player, position):
         player._potions.append(position)

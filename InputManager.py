@@ -5,7 +5,7 @@ import queue
 class InputManager:
     def __init__(self, player):
         self._player = player
-        self._player_rect_top = 0  # ?
+        self._player_rect_top = 0
         self._player_rect_bot = 0
         self._scene_resolution = (760, 520)
         self._scene_floors = [pygame.Rect(380, 312, 380, 26),
@@ -90,3 +90,7 @@ class InputManager:
 
     def _stand_up(self):
         self._crouching = False
+
+    def _attack(self):
+        self._player.attack_animation()
+

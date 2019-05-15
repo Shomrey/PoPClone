@@ -57,7 +57,7 @@ class Player(pygame.sprite.Sprite):
             self.death_animation()
         if len(self._potions) > 0:
             for i in self._potions:
-                if i[0] < self._position[0]+width//2 < i[0] + 20 and i[1] >= self._position[1] >= i[1] - 20:
+                if i[0] < self._position[0]+width//2 < i[0] + width and i[1] >= self._position[1] >= i[1] - height:
                     self._potions.remove(i)
                     self._health += 1
         if len(self._traps) > 0:

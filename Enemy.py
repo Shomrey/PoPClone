@@ -45,7 +45,7 @@ class Enemy(pygame.sprite.Sprite):
         player_position = self._player.get_position()
         self._direction = "Left" if self._position[0] > player_position[0] else "Right"
         distance = self.get_distance_to_player()
-        if self._player.get_edge() > self._position[0] and self._player.get_edge() < self._position[0] + width:
+        if self._position[0] < self._player.get_edge() < self._position[0] + width and self._position[1] - height < self._player.get_position()[1] < self._position[1] :
             self._is_alive = False
         if distance < self._perform_attack_range:
             self._attack_time += 1

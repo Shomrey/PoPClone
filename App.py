@@ -25,6 +25,8 @@ class App:
         self._clock = pygame.time.Clock()
         self.spawn_enemy(self._player, [600, 258])
         self.add_potion(self._player, [300,308])
+        self.spawn_enemy(self._player, [500, 258])
+        self.add_potion(self._player, [550,308])
 
 
     def on_execute(self):

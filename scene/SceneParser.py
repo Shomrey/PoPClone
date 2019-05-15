@@ -17,7 +17,6 @@ class SceneParser:
         Each scene consists of multiple screenshots-part of the scene between two screen borders.
         Ergo: one file-one scene-multiple screenshots.
         :param scene_file_path: path to the scene to parse
-        :param resolution: [deprecated] actual screen resolution
         :return: a dictionary of geometry layers and scene resolution in pixels
         """
         geometry = defaultdict(lambda: [])
@@ -46,17 +45,19 @@ class SceneParser:
 
     @staticmethod
     def _parse_layer(layers, layer_name, scene_resolution):
-        rectangle_xmls = next((layer.getElementsByTagName('rect') for layer in layers
-                           if layer.attributes['inkscape:label'].value == layer_name), [])
+        layer = next((layer for layer in layers
+                           if layer.attributes['inkscape:label'].value == layer_name), None)
 
-        rectangles = [SceneParser._parse_rect_from_xml(rect, scene_resolution) for rect in rectangle_xmls]
+        if layer is not None:
+            rectangle_xmls = layer.getElementsByTagName('rect')
+            rectangles = [SceneParser._parse_rect_from_xml(rect, scene_resolution) for rect in rectangle_xmls]
 
-        image_xmls = next((layer.getElementsByTagName('image') for layer in layers
-                           if layer.attributes['inkscape:label'].value == layer_name), [])
+            image_xmls = layer.getElementsByTagName('image')
+            images = [SceneParser._parse_image_from_xml(image, scene_resolution) for image in image_xmls]
 
-        images = [SceneParser._parse_image_from_xml(image, scene_resolution) for image in image_xmls]
-
-        return rectangles + images
+            return rectangles + images
+        else:
+            return []
 
     @staticmethod
     def _parse_dimensions_from_xml(xml_element, scene_resolution):

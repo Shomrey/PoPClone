@@ -5,35 +5,72 @@ height = 70
 attackWidth = 30
 frameSlow = 3
 
-runRight = [pygame.transform.scale(pygame.image.load('png/Run/Right_1.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Right_2.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Right_3.png'), (width,height)),
-            pygame.transform.scale(pygame.image.load('png/Run/Right_4.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Right_5.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Right_6.png'), (width,height)),
-            pygame.transform.scale(pygame.image.load('png/Run/Right_7.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Right_8.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Right_9.png'), (width,height))]
+runRight = [pygame.transform.scale(pygame.image.load('png/Run/Right_1.png'), (width, height)),
+            pygame.transform.scale(pygame.image.load('png/Run/Right_2.png'), (width, height)),
+            pygame.transform.scale(pygame.image.load('png/Run/Right_3.png'), (width, height)),
+            pygame.transform.scale(pygame.image.load('png/Run/Right_4.png'), (width, height)),
+            pygame.transform.scale(pygame.image.load('png/Run/Right_5.png'), (width, height)),
+            pygame.transform.scale(pygame.image.load('png/Run/Right_6.png'), (width, height)),
+            pygame.transform.scale(pygame.image.load('png/Run/Right_7.png'), (width, height)),
+            pygame.transform.scale(pygame.image.load('png/Run/Right_8.png'), (width, height)),
+            pygame.transform.scale(pygame.image.load('png/Run/Right_9.png'), (width, height))]
 
-runLeft = [pygame.transform.scale(pygame.image.load('png/Run/Left_1.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Left_2.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Left_3.png'), (width,height)),
-           pygame.transform.scale(pygame.image.load('png/Run/Left_4.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Left_5.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Left_6.png'), (width,height)),
-           pygame.transform.scale(pygame.image.load('png/Run/Left_7.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Left_8.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Run/Left_9.png'), (width,height))]
+runLeft = [pygame.transform.scale(pygame.image.load('png/Run/Left_1.png'), (width, height)),
+           pygame.transform.scale(pygame.image.load('png/Run/Left_2.png'), (width, height)),
+           pygame.transform.scale(pygame.image.load('png/Run/Left_3.png'), (width, height)),
+           pygame.transform.scale(pygame.image.load('png/Run/Left_4.png'), (width, height)),
+           pygame.transform.scale(pygame.image.load('png/Run/Left_5.png'), (width, height)),
+           pygame.transform.scale(pygame.image.load('png/Run/Left_6.png'), (width, height)),
+           pygame.transform.scale(pygame.image.load('png/Run/Left_7.png'), (width, height)),
+           pygame.transform.scale(pygame.image.load('png/Run/Left_8.png'), (width, height)),
+           pygame.transform.scale(pygame.image.load('png/Run/Left_9.png'), (width, height))]
 
-jump = [pygame.transform.scale(pygame.image.load('png/Jump/Jump_001.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Jump/Jump_002.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Jump/Jump_003.png'), (width,height)),
-           pygame.transform.scale(pygame.image.load('png/Jump/Jump_004.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Jump/Jump_005.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Jump/Jump_006.png'), (width,height)),
-           pygame.transform.scale(pygame.image.load('png/Jump/Jump_007.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Jump/Jump_008.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Jump/Jump_009.png'), (width,height))]
+jump = [pygame.transform.scale(pygame.image.load('png/Jump/Jump_001.png'), (width, height)),
+        pygame.transform.scale(pygame.image.load('png/Jump/Jump_002.png'), (width, height)),
+        pygame.transform.scale(pygame.image.load('png/Jump/Jump_003.png'), (width, height)),
+        pygame.transform.scale(pygame.image.load('png/Jump/Jump_004.png'), (width, height)),
+        pygame.transform.scale(pygame.image.load('png/Jump/Jump_005.png'), (width, height)),
+        pygame.transform.scale(pygame.image.load('png/Jump/Jump_006.png'), (width, height)),
+        pygame.transform.scale(pygame.image.load('png/Jump/Jump_007.png'), (width, height)),
+        pygame.transform.scale(pygame.image.load('png/Jump/Jump_008.png'), (width, height)),
+        pygame.transform.scale(pygame.image.load('png/Jump/Jump_009.png'), (width, height))]
 
-attackRight = [pygame.transform.scale(pygame.image.load('png/Attack/Attack__000.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Attack__001.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Attack__002.png'), (width+attackWidth,height)),
-               pygame.transform.scale(pygame.image.load('png/Attack/Attack__003.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Attack__004.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Attack__005.png'), (width+attackWidth,height)),
-               pygame.transform.scale(pygame.image.load('png/Attack/Attack__006.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Attack__007.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Attack__008.png'), (width+attackWidth,height))]
+attackRight = [pygame.transform.scale(pygame.image.load('png/Attack/Attack__000.png'), (width + attackWidth, height)),
+               pygame.transform.scale(pygame.image.load('png/Attack/Attack__001.png'), (width + attackWidth, height)),
+               pygame.transform.scale(pygame.image.load('png/Attack/Attack__002.png'), (width + attackWidth, height)),
+               pygame.transform.scale(pygame.image.load('png/Attack/Attack__003.png'), (width + attackWidth, height)),
+               pygame.transform.scale(pygame.image.load('png/Attack/Attack__004.png'), (width + attackWidth, height)),
+               pygame.transform.scale(pygame.image.load('png/Attack/Attack__005.png'), (width + attackWidth, height)),
+               pygame.transform.scale(pygame.image.load('png/Attack/Attack__006.png'), (width + attackWidth, height)),
+               pygame.transform.scale(pygame.image.load('png/Attack/Attack__007.png'), (width + attackWidth, height)),
+               pygame.transform.scale(pygame.image.load('png/Attack/Attack__008.png'), (width + attackWidth, height))]
 
-attackLeft = [pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__000.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__001.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__002.png'), (width+attackWidth,height)),
-               pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__003.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__004.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__005.png'), (width+attackWidth,height)),
-               pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__006.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__007.png'), (width+attackWidth,height)),pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__008.png'), (width+attackWidth,height))]
+attackLeft = [
+    pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__000.png'), (width + attackWidth, height)),
+    pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__001.png'), (width + attackWidth, height)),
+    pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__002.png'), (width + attackWidth, height)),
+    pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__003.png'), (width + attackWidth, height)),
+    pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__004.png'), (width + attackWidth, height)),
+    pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__005.png'), (width + attackWidth, height)),
+    pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__006.png'), (width + attackWidth, height)),
+    pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__007.png'), (width + attackWidth, height)),
+    pygame.transform.scale(pygame.image.load('png/Attack/Left_Attack__008.png'), (width + attackWidth, height))]
 
-death = [pygame.transform.scale(pygame.image.load('png/Death/Dead__000.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Death/Dead__002.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Death/Dead__003.png'), (width,height)),
-           pygame.transform.scale(pygame.image.load('png/Death/Dead__004.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Death/Dead__005.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Death/Dead__006.png'), (width,height)),
-           pygame.transform.scale(pygame.image.load('png/Death/Dead__007.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Death/Dead__008.png'), (width,height)), pygame.transform.scale(pygame.image.load('png/Death/Dead__009.png'), (width,height))]
-
+death = [pygame.transform.scale(pygame.image.load('png/Death/Dead__000.png'), (width, height)),
+         pygame.transform.scale(pygame.image.load('png/Death/Dead__002.png'), (width, height)),
+         pygame.transform.scale(pygame.image.load('png/Death/Dead__003.png'), (width, height)),
+         pygame.transform.scale(pygame.image.load('png/Death/Dead__004.png'), (width, height)),
+         pygame.transform.scale(pygame.image.load('png/Death/Dead__005.png'), (width, height)),
+         pygame.transform.scale(pygame.image.load('png/Death/Dead__006.png'), (width, height)),
+         pygame.transform.scale(pygame.image.load('png/Death/Dead__007.png'), (width, height)),
+         pygame.transform.scale(pygame.image.load('png/Death/Dead__008.png'), (width, height)),
+         pygame.transform.scale(pygame.image.load('png/Death/Dead__009.png'), (width, height))]
 
 hearth = pygame.transform.scale(pygame.image.load('png/hearth.svg'), (15, 15))
 
 potion = pygame.transform.scale(pygame.image.load('png/potion.png'), (20, 20))
 
+trap = pygame.transform.scale(pygame.image.load('png/trap.png'), (20, 20))
 
 
 class Player(pygame.sprite.Sprite):
@@ -49,29 +86,31 @@ class Player(pygame.sprite.Sprite):
         self._edge = 0
         self._potions = []
         self._traps = []
-
+        self._attacked_left = False
 
     def on_update(self):
         if self._health <= 0:
-            #disable Input Manager
+            # disable Input Manager
             self.death_animation()
         if len(self._potions) > 0:
             for i in self._potions:
-                if i[0]-width <= self._position[0] <= i[0] and i[1] >= self._position[1] >= i[1] - height:
+                if i[0] - width <= self._position[0] <= i[0] and i[1] >= self._position[1] >= i[1] - height:
                     self._potions.remove(i)
                     self._health += 1
         if len(self._traps) > 0:
             for i in self._traps:
-                if i[0] < self._position[0]+width//2 < i[0] + 20 and i[1] == self._position[1]:
+                if i[0] - width < self._position[0] < i[0] and i[1] >= self._position[1] >= i[1] - 10:
                     self._health = 0
 
     def on_render(self, screen):
         position_rect = self._image.get_rect().move(self._position[0], self._position[1])
         screen.blit(self._image, position_rect)
         for i in range(self._health):
-            screen.blit(hearth, [10 + 15*i, 20])
+            screen.blit(hearth, [10 + 15 * i, 20])
         for i in range(len(self._potions)):
             screen.blit(potion, self._potions[i])
+        for i in range(len(self._traps)):
+            screen.blit(trap, self._traps[i])
 
     def get_position(self):
         return self._position
@@ -91,30 +130,36 @@ class Player(pygame.sprite.Sprite):
     def right_movement_animation(self):
         self._direction = "Right"
         self._edge = 0
-        self._image = runRight[self._walkCount//frameSlow]
+        if self._attacked_left:
+            self._attacked_left = False
+            self._position[0] += attackWidth
+        self._image = runRight[self._walkCount // frameSlow]
         self._walkCount += 1
-        if self._walkCount >= 9*frameSlow:
+        if self._walkCount >= 9 * frameSlow:
             self._walkCount = 0
 
     def left_movement_animation(self):
         self._direction = "Left"
         self._edge = 0
-        self._image = runLeft[self._walkCount//frameSlow]
+        if self._attacked_left:
+            self._attacked_left = False
+            self._position[0] += attackWidth
+        self._image = runLeft[self._walkCount // frameSlow]
         self._walkCount += 1
-        if self._walkCount >= 9*frameSlow:
+        if self._walkCount >= 9 * frameSlow:
             self._walkCount = 0
 
     def jump_animation(self):
         self._direction = "Up"
         self._inAir = True
-        self._image = jump[self._walkCount//frameSlow]
+        self._image = jump[self._walkCount // frameSlow]
         self._walkCount += 1
-        if self._walkCount >= 9*frameSlow:
+        if self._walkCount >= 9 * frameSlow:
             self._walkCount = 0
 
     def attack_animation(self):
-        if self._walkCount >=9:
-            self._walkCount = self._walkCount//frameSlow
+        if self._walkCount >= 9:
+            self._walkCount = self._walkCount // frameSlow
         FPS, timer = 60, 0
         if self._direction == "Right":
             timer = 1 * FPS
@@ -127,6 +172,9 @@ class Player(pygame.sprite.Sprite):
             if self._walkCount >= 9:
                 self._walkCount = 0
         elif self._direction == "Left":
+            if not self._attacked_left:
+                self._attacked_left = True
+                self._position[0] -= attackWidth
             timer = 1 * FPS
             while timer != 0:
                 timer -= 1

@@ -17,8 +17,8 @@ class InputManager:
             pressed = pygame.key.get_pressed()
             if pressed[pygame.K_UP]:    self._key_bindings[pygame.K_UP]()
             if pressed[pygame.K_DOWN]:  self._key_bindings[pygame.K_DOWN]()
-            if pressed[pygame.K_LEFT]:  self._key_bindings[pygame.K_LEFT]()
-            if pressed[pygame.K_RIGHT]: self._key_bindings[pygame.K_RIGHT]()
+            if pressed[pygame.K_LEFT] and not pressed[pygame.K_SPACE]:  self._key_bindings[pygame.K_LEFT]()
+            if pressed[pygame.K_RIGHT] and not pressed[pygame.K_SPACE]: self._key_bindings[pygame.K_RIGHT]()
             if pressed[pygame.K_SPACE]: self._key_bindings[pygame.K_SPACE]()
 
     def _jump(self):

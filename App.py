@@ -1,5 +1,6 @@
 import pygame
 from scene.GameScene import GameScene
+from scene.TestScene import TestScene
 from Player import Player
 from InputManager import InputManager
 from Enemy import Enemy
@@ -13,7 +14,7 @@ class App:
         self._player = None
         self._input_manager = None
         self._resolution = (760, 520)
-        self._scene = GameScene(self._resolution)
+        self._scene = TestScene(self._resolution)
         self._enemies = []
         self._number_of_enemies = 0
 

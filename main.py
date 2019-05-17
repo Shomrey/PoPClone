@@ -1,4 +1,5 @@
 from App import App
+import traceback
 
 
 def main():
@@ -6,7 +7,7 @@ def main():
         app = App()
         app.on_execute()
     except Exception as e:
-        print(f'Error: {e}')
+        print(f'Error: {e}\n', traceback.format_exc())
 
 
 if __name__ == '__main__':

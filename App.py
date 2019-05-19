@@ -1,6 +1,7 @@
 import pygame
-from scene.GameScene import GameScene
-from scene.TestScene import TestScene
+import os
+from scene.BasicScene import BasicScene
+from scene.SceneLayer import SceneLayer
 from Player import Player
 from InputManager import InputManager
 from Enemy import Enemy
@@ -14,22 +15,22 @@ class App:
         self._player = None
         self._input_manager = None
         self._resolution = (760, 520)
-        self._scene = TestScene(self._resolution)
         self._enemies = []
         self._number_of_enemies = 0
+        self._scene = BasicScene(self._resolution, os.path.join(os.getcwd(), 'res/scenes/first_level.svg'))
 
     def on_init(self):
-        self._player = Player()
-        self._input_manager = InputManager(self._player)
         pygame.init()
         self._screen = pygame.display.set_mode(self._resolution)
         self._clock = pygame.time.Clock()
+        starting_point = self._scene.get_start_position(self._screen.get_rect())
+        self._player = Player(starting_point)
+        self._input_manager = InputManager(self._player)
         self.spawn_enemy(self._player, [600, 258])
         self.add_potion(self._player, [300,308])
         self.spawn_enemy(self._player, [500, 258])
         self.add_potion(self._player, [550,308])
         self.create_trap(self._player, [400, 308])
-
 
     def on_execute(self):
         if self.on_init() is False:

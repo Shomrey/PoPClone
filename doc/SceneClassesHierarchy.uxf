@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>310</y>
+      <w>190</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>BasicScene
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>120</y>
+      <w>520</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>/SceneBase/
+--
+-_screen_resolution : (int, int)
+-_geometry	: defaultdict&lt; SceneLayer, list&lt;(pygame.Rect, (r,g,b))&gt; &gt;
+--
++on_update()
++on_render(screen)
++get_layer(layer : SceneLayer) : list&lt;(rect, (r,g,b))&gt;
+-_to_screen_rect(rect)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>280</x>
+      <y>250</y>
+      <w>160</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>300</y>
+      <w>470</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>SceneParser
+--
++parse(scene_file_path : Path, resolution) : dict&lt;SceneLayer, list&lt;rect&gt; &gt;
+-_parse_rect_from_xml(rect, resolution, scene_resolution)
+-_value_parse(value_str, dim, resolution, scene_resolution)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>230</x>
+      <y>190</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;20.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>70</x>
+      <y>130</y>
+      <w>170</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enum&gt;&gt;
+SceneLayer
+--
++PHYSICAL_SCENE
++BACKGROUND</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>250</y>
+      <w>100</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>80.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

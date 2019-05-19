@@ -8,10 +8,6 @@ class InputManager:
         self._player_rect_top = 0
         self._player_rect_bot = 0
         self._scene_resolution = (760, 520)
-        # self._scene_floors = [pygame.Rect(380, 312, 380, 26),
-        #                       pygame.Rect(608, 104, 152, 26),
-        #                       pygame.Rect(0, 416, 760, 26),
-        #                       pygame.Rect(608, 208, 152, 26)]
         self._scene_floors = scene_floors
         self._jump_queue = queue.Queue()
         self._jump_x = 0

@@ -40,6 +40,12 @@ class SceneBase(ABC):
     def get_screenshot_number(self, x):
         return x // self._screenshot_resolution[0]
 
+    def get_current_screenshot(self):
+        return self._current_screenshot
+
+    def get_screenshot_resolution(self):
+        return self._screenshot_resolution
+
     def get_start_position(self, screen_rect):
         start_position_rect = Renderable.to_screen_rect(self.get_layer(SceneLayer.START_POSITION)[0].get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot)
         return [start_position_rect.x, start_position_rect.y]

@@ -2,6 +2,7 @@ import pygame
 import os
 from scene.BasicScene import BasicScene
 from scene.SceneLayer import SceneLayer
+from scene.render.Renderable import Renderable
 from Player import Player
 from InputManager import InputManager
 from Enemy import Enemy
@@ -25,7 +26,9 @@ class App:
         self._clock = pygame.time.Clock()
         starting_point = self._scene.get_start_position(self._screen.get_rect())
         self._player = Player(starting_point)
-        self._input_manager = InputManager(self._player)
+        floors = [Renderable.to_screen_rect(rect.get_rect(), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
+                  for rect in self._scene.get_layer(SceneLayer.PHYSICAL_SCENE)]
+        self._input_manager = InputManager(self._player, floors)
         self.spawn_enemy(self._player, [600, 258])
         self.add_potion(self._player, [300,308])
         self.spawn_enemy(self._player, [500, 258])

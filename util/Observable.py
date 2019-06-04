@@ -20,8 +20,8 @@ class Observable(ABC):
         event_type - class (inheriting from Event abstract class) to subscribe to
         callback - callback to perform on the event class instance
         """
-        self.subscribers[event_type].append(callback)
+        self.subscribers[event_type.__name__].append(callback)
 
     def event(self, event):
-        for callback in self.subscribers[event.__class__]:
+        for callback in self.subscribers[event.__class__.__name__]:
             callback(event)

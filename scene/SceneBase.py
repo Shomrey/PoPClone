@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from scene.SceneParser import SceneParser
 from scene.SceneLayer import SceneLayer
 from scene.render.Renderable import Renderable
+from scene.PlayerOutOfScreenObserver import PlayerLeftScreen
 
 
 class SceneBase(ABC):
@@ -49,3 +50,11 @@ class SceneBase(ABC):
     def get_start_position(self, screen_rect):
         start_position_rect = Renderable.to_screen_rect(self.get_layer(SceneLayer.START_POSITION)[0].get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot)
         return [start_position_rect.x, start_position_rect.y]
+
+    def handle_screenshot_change(self, playerLeftScreen):
+        if playerLeftScreen.type == PlayerLeftScreen.Type.LEFT_LEFT:
+            self._current_screenshot -= 1
+        elif playerLeftScreen.type == PlayerLeftScreen.Type.LEFT_RIGHT:
+            self._current_screenshot += 1
+        else:
+            raise NotImplementedError

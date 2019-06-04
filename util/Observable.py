@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from collections import defaultdict
 
 
 class Event(ABC):
@@ -8,11 +9,19 @@ class Event(ABC):
 class Observable(ABC):
     @abstractmethod
     def __init__(self):
-        self.subscribers = []
+        self.subscribers = defaultdict(lambda: [])
 
-    def subscribe(self, callback):
-        self.subscribers.append(callback)
+    def subscribe(self, event_type, callback):
+        """
+        Subscribe to given event
+
+        Params
+        -------
+        event_type - class (inheriting from Event abstract class) to subscribe to
+        callback - callback to perform on the event class instance
+        """
+        self.subscribers[event_type].append(callback)
 
     def event(self, event):
-        for callback in self.subscribers:
+        for callback in self.subscribers[event.__class__]:
             callback(event)

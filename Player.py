@@ -202,3 +202,4 @@ class Player(pygame.sprite.Sprite):
 
     def get_edge(self):
         return self._edge
+

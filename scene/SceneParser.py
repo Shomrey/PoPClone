@@ -40,11 +40,11 @@ class SceneParser:
 
         # Parse game elements from sublayers of GAME_ELEMENTS layer
         game_elements = next((layer.getElementsByTagName('g') for layer in layers if layer.attributes['inkscape:label'].value == "GAME_ELEMENTS"), [])
-        geometry[SceneLayer.START_POSITION] = SceneParser._parse_layer(game_elements, "START_POSITION", scene_resolution)
+        geometry[SceneLayer.START_POSITION] = SceneParser._parse_layer(game_elements, "START_POSITION", scene_resolution, clip_paths)
 
         # Parse the rest of the layers
         for layer, layer_name in LAYERS_NAMES.items():
-            geometry[layer] = SceneParser._parse_layer(layers, layer_name, scene_resolution)
+            geometry[layer] = SceneParser._parse_layer(layers, layer_name, scene_resolution, clip_paths)
 
         return geometry, scene_resolution
 
@@ -60,7 +60,7 @@ class SceneParser:
         return clip_paths
 
     @staticmethod
-    def _parse_layer(layers, layer_name, scene_resolution):
+    def _parse_layer(layers, layer_name, scene_resolution, clip_paths):
         layer = next((layer for layer in layers
                       if layer.attributes['inkscape:label'].value == layer_name), None)
 
@@ -69,7 +69,7 @@ class SceneParser:
             rectangles = [SceneParser._parse_rect_from_xml(rect, scene_resolution) for rect in rectangle_xmls]
 
             image_xmls = layer.getElementsByTagName('image')
-            images = [SceneParser._parse_image_from_xml(image, scene_resolution) for image in image_xmls]
+            images = [SceneParser._parse_image_from_xml(image, scene_resolution, clip_paths) for image in image_xmls]
 
             return rectangles + images
         else:
@@ -106,12 +106,18 @@ class SceneParser:
         return Rectangle(x, y, width, height, (r, g, b))
 
     @staticmethod
-    def _parse_image_from_xml(image, scene_resolution):
+    def _parse_image_from_xml(image, scene_resolution, clip_paths):
         """Returns an Image object parsed from XML data"""
         x, y, width, height = SceneParser._parse_dimensions_from_xml(image, scene_resolution)
         scale_x, scale_y = SceneParser._parse_transform(image)
         filename = os.path.join("res/scenes/elements", os.path.split(image.attributes['xlink:href'].value)[1])
-        return Image(x, y, width, height, filename, scale_x=scale_x, scale_y=scale_y)
+
+        clip_path_rect = None
+        if image.hasAttribute('clip-path'):
+            clip_path_name = parse("url(#{})", image.attributes['clip-path'].value)[0]
+            clip_path_rect = clip_paths[clip_path_name].get_rect()
+
+        return Image(x, y, width, height, filename, scale_x, scale_y, clip_path_rect)
 
     @staticmethod
     def _parse_value(value_str, dim,  scene_resolution):

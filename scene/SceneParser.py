@@ -10,7 +10,10 @@ import os
 LAYERS_NAMES = {SceneLayer.BACKGROUND:      "LEVEL_BACKGROUND",
                 SceneLayer.FOREGROUND:      "LEVEL_FOREGROUND",
                 SceneLayer.PHYSICAL_SCENE:  "LEVEL_FLOORS",
-                SceneLayer.SCREEN_BORDERS:  "SCREEN_BORDERS"}
+                SceneLayer.SCREEN_BORDERS:  "SCREEN_BORDERS",
+                SceneLayer.ENEMIES:         "ENEMIES",
+                SceneLayer.TRAPS:           "TRAPS",
+                SceneLayer.POTIONS:         "POTIONS"}
 
 class SceneParser:
     @staticmethod
@@ -87,8 +90,11 @@ class SceneParser:
     def _parse_transform(xml_element):
         try:
             result = parse("scale({},{})", xml_element.attributes['transform'].value)
-            scale_x, scale_y = float(result[0]), float(result[1])
-            return scale_x, scale_y
+            if result:
+                scale_x, scale_y = float(result[0]), float(result[1])
+                return scale_x, scale_y
+            else:
+                return 1, 1
         except KeyError:
             return 1, 1
 

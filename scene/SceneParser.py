@@ -124,5 +124,5 @@ class SceneParser:
     def _parse_value(value_str, dim,  scene_resolution):
         if '%' in value_str:
             relative_value = float(value_str.replace("%", "")) / 100.0
-            return relative_value * (scene_resolution[0] if dim == 'x' else scene_resolution[1])
+            return round(relative_value * (scene_resolution[0] if dim == 'x' else scene_resolution[1]))
         return float(value_str)

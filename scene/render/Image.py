@@ -11,13 +11,14 @@ class Image(Renderable):
         if scale_x < 0:
             x -= width
             self._image = pygame.transform.flip(self._image, True, False)
+
         y *= abs(scale_y)
         height *= scale_y
-
         if scale_y < 0:
             y += height
             self._image = pygame.transform.flip(self._image, False, True)
         self._rect = pygame.rect.Rect(x, y, width, height)
+
         if clip_rect:
             original_rect = self._rect.copy()
             self._rect = self._rect.clip(clip_rect)

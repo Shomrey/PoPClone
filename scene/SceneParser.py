@@ -3,7 +3,7 @@ from collections import defaultdict
 from scene.SceneLayer import SceneLayer
 from scene.render.Rectangle import Rectangle
 from scene.render.Image import Image
-from parse import parse
+from parse import parse, search
 import os
 
 
@@ -34,6 +34,8 @@ class SceneParser:
         scene_height = float(root.attributes['height'].value)
         scene_resolution = (scene_width, scene_height)
 
+        clip_paths = SceneParser._parse_clip_paths(root, scene_resolution)
+
         layers = xml_file.getElementsByTagName('g')  # 'g' is the tag name for a layer
 
         # Parse game elements from sublayers of GAME_ELEMENTS layer
@@ -45,6 +47,17 @@ class SceneParser:
             geometry[layer] = SceneParser._parse_layer(layers, layer_name, scene_resolution)
 
         return geometry, scene_resolution
+
+    @staticmethod
+    def _parse_clip_paths(root_element, scene_resolution):
+        clip_path_elements = root_element.getElementsByTagName('clipPath')
+        clip_paths = {}
+        for clip_path in clip_path_elements:
+            # we assume, that each clip path consists of only one rect
+            clip_path_rect = SceneParser._parse_rect_from_xml(
+                clip_path.getElementsByTagName('rect')[0], scene_resolution)
+            clip_paths[clip_path.attributes['id'].value] = clip_path_rect
+        return clip_paths
 
     @staticmethod
     def _parse_layer(layers, layer_name, scene_resolution):
@@ -82,11 +95,14 @@ class SceneParser:
     @staticmethod
     def _parse_rect_from_xml(rect, scene_resolution):
         """Returns a Rectangle object parsed from XML data"""
+
+        # Parse dimensions
         x, y, width, height = SceneParser._parse_dimensions_from_xml(rect, scene_resolution)
-        color = rect.attributes['style'].value[6:12]
-        r = int(color[0:2], 16)
-        g = int(color[2:4], 16)
-        b = int(color[4:6], 16)
+
+        # Parse color
+        color = search("fill:#{};", rect.attributes['style'].value)[0]
+        r, g, b = [int(parsed, 16) for parsed in parse("{:.2}{:.2}{:2}", color)]
+
         return Rectangle(x, y, width, height, (r, g, b))
 
     @staticmethod

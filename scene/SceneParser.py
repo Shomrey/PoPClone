@@ -3,8 +3,14 @@ from collections import defaultdict
 from scene.SceneLayer import SceneLayer
 from scene.render.Rectangle import Rectangle
 from scene.render.Image import Image
+from parse import parse
 import os
 
+
+LAYERS_NAMES = {SceneLayer.BACKGROUND:      "LEVEL_BACKGROUND",
+                SceneLayer.FOREGROUND:      "LEVEL_FOREGROUND",
+                SceneLayer.PHYSICAL_SCENE:  "LEVEL_FLOORS",
+                SceneLayer.SCREEN_BORDERS:  "SCREEN_BORDERS"}
 
 class SceneParser:
     @staticmethod
@@ -35,10 +41,7 @@ class SceneParser:
         geometry[SceneLayer.START_POSITION] = SceneParser._parse_layer(game_elements, "START_POSITION", scene_resolution)
 
         # Parse the rest of the layers
-        for layer, layer_name in dict([(SceneLayer.BACKGROUND, "LEVEL_BACKGROUND"),
-                                        (SceneLayer.FOREGROUND, "LEVEL_FOREGROUND"),
-                                        (SceneLayer.PHYSICAL_SCENE, "LEVEL_FLOORS"),
-                                        (SceneLayer.SCREEN_BORDERS, "SCREEN_BORDERS")]).items():
+        for layer, layer_name in LAYERS_NAMES.items():
             geometry[layer] = SceneParser._parse_layer(layers, layer_name, scene_resolution)
 
         return geometry, scene_resolution
@@ -46,7 +49,7 @@ class SceneParser:
     @staticmethod
     def _parse_layer(layers, layer_name, scene_resolution):
         layer = next((layer for layer in layers
-                           if layer.attributes['inkscape:label'].value == layer_name), None)
+                      if layer.attributes['inkscape:label'].value == layer_name), None)
 
         if layer is not None:
             rectangle_xmls = layer.getElementsByTagName('rect')
@@ -68,6 +71,15 @@ class SceneParser:
         return x, y, width, height
 
     @staticmethod
+    def _parse_transform(xml_element):
+        try:
+            result = parse("scale({},{})", xml_element.attributes['transform'].value)
+            scale_x, scale_y = float(result[0]), float(result[1])
+            return scale_x, scale_y
+        except KeyError:
+            return 1, 1
+
+    @staticmethod
     def _parse_rect_from_xml(rect, scene_resolution):
         """Returns a Rectangle object parsed from XML data"""
         x, y, width, height = SceneParser._parse_dimensions_from_xml(rect, scene_resolution)
@@ -81,8 +93,9 @@ class SceneParser:
     def _parse_image_from_xml(image, scene_resolution):
         """Returns an Image object parsed from XML data"""
         x, y, width, height = SceneParser._parse_dimensions_from_xml(image, scene_resolution)
+        scale_x, scale_y = SceneParser._parse_transform(image)
         filename = os.path.join("res/scenes/elements", os.path.split(image.attributes['xlink:href'].value)[1])
-        return Image(x, y, width, height, filename)
+        return Image(x, y, width, height, filename, scale_x=scale_x, scale_y=scale_y)
 
     @staticmethod
     def _parse_value(value_str, dim,  scene_resolution):

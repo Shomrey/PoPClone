@@ -36,9 +36,10 @@ class App:
             print(enemy[0], enemy[1])
             enemy_to_spawn = [enemy[0], enemy[1]]
             print(enemy_to_spawn)
-            self.spawn_enemy(self._player, enemy_to_spawn)
+            self.spawn_enemy(self._player, enemy_to_spawn, enemy[2])
             print("I am spawned")
         print("enemies spawned")
+        print(self._enemies)
         potions = self._scene.get_potions(self._screen.get_rect())
         traps = self._scene.get_traps(self._screen.get_rect())
         floors = [Renderable.to_screen_rect(rect.get_rect(), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
@@ -91,8 +92,8 @@ class App:
     def on_cleanup(self):
         pass
 
-    def spawn_enemy(self, player, position):
-        enemy = Enemy(player, position)
+    def spawn_enemy(self, player, position, screen):
+        enemy = Enemy(player, position, screen)
         self._enemies.append(enemy)
         self._number_of_enemies += 1
 

@@ -1,5 +1,6 @@
 import pygame
 from math import fabs
+import scene.SceneBase as SB
 
 width = 50
 height = 70
@@ -18,7 +19,7 @@ attackLeft = [pygame.transform.scale(pygame.image.load('png/EnemyAttack/Left_Att
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, player, position):
+    def __init__(self, player, position, screen_number):
         pygame.sprite.Sprite.__init__(self)
         self._player = player
         self._position = position
@@ -30,6 +31,10 @@ class Enemy(pygame.sprite.Sprite):
         self._perform_attack_range = 200
         self._attack_time = 0
         self._is_alive = True
+        self._screen_number = screen_number
+
+    def get_screen_number(self):
+        return self._screen_number
 
     def get_distance_to_player(self):
         player_position = self._player.get_position()

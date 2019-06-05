@@ -98,12 +98,13 @@ class SceneParser:
 
         # Parse dimensions
         x, y, width, height = SceneParser._parse_dimensions_from_xml(rect, scene_resolution)
+        scale_x, scale_y = SceneParser._parse_transform(rect)
 
         # Parse color
         color = search("fill:#{};", rect.attributes['style'].value)[0]
         r, g, b = [int(parsed, 16) for parsed in parse("{:.2}{:.2}{:2}", color)]
 
-        return Rectangle(x, y, width, height, (r, g, b))
+        return Rectangle(x, y, width, height, (r, g, b), scale_x, scale_y)
 
     @staticmethod
     def _parse_image_from_xml(image, scene_resolution, clip_paths):

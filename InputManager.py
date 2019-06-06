@@ -6,7 +6,6 @@ from CollisionDetector import CollisionDetector, Side
 class InputManager:
     def __init__(self, player, scene_floors):
         self._player = player
-        # self._scene_resolution = (760, 520)
         self._scene_floors = scene_floors
         self._detector = CollisionDetector(player, scene_floors)
         self._jump_queue = queue.Queue()
@@ -16,6 +15,7 @@ class InputManager:
 
     def on_update(self):
         pressed = pygame.key.get_pressed()
+        self._detector.on_update()
 
         if self._detector.check_collision(Side.TOP):
             while not self._jump_queue.empty(): self._jump_queue.get()
@@ -26,7 +26,7 @@ class InputManager:
             while not self._jump_queue.empty(): self._jump_queue.get()
         else:
             self._jump_queue.put(9)
-            
+
         if not self._jump_queue.empty():
             pressed = self._none_pressed
             self._jump_continue()
@@ -48,12 +48,9 @@ class InputManager:
             if self._crouching:
                 self._stand_up()
 
-        # if self._player.get_position()[0] < 0:
-        #     self._player.set_position(0, None)
-        #     self._jump_x = 0
-
     def update_floors(self, scene_floors):
         self._scene_floors = scene_floors
+        self._detector.update_floors(scene_floors)
 
     def _jump_up(self):
         jump_values = (-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0)  # 45

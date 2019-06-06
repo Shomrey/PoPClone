@@ -10,9 +10,9 @@ class SceneBase(ABC):
         self._screen_resolution = screen_resolution
 
         # contains all parsed geometry as well as the physical scene
-        self._geometry, scene_resolution = SceneParser.parse(scene_file_path)
+        self._geometry, self._scene_resolution = SceneParser.parse(scene_file_path)
         screenshot_width = self.get_layer(SceneLayer.SCREEN_BORDERS)[1].get_x() - self.get_layer(SceneLayer.SCREEN_BORDERS)[0].get_x()  # TODO: Handle uneven screenshots
-        self._screenshot_resolution = (screenshot_width, scene_resolution[1])
+        self._screenshot_resolution = (screenshot_width, self._scene_resolution[1])
         self._current_screenshot = self.get_screenshot_number(self.get_layer(SceneLayer.START_POSITION)[0].get_x())
 
         # contains all layers to be rendered on every on_render call
@@ -79,10 +79,22 @@ class SceneBase(ABC):
             traps_to_return.append(Renderable.to_screen_rect(trap.get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot))
         return traps_to_return
 
+    def get_current_screenshot_floors(self, screen):
+        floors = [Renderable.to_screen_rect(
+            rect.get_rect(), screen.get_rect(), self.get_screenshot_resolution(),
+            self.get_screenshot_resolution()[0] * self.get_current_screenshot())
+            for rect in self.get_layer(SceneLayer.PHYSICAL_SCENE)]
+        return floors
+
     def handle_screenshot_change(self, playerLeftScreen):
         if playerLeftScreen.type == PlayerLeftScreen.Type.LEFT_LEFT:
             self._current_screenshot -= 1
         elif playerLeftScreen.type == PlayerLeftScreen.Type.LEFT_RIGHT:
             self._current_screenshot += 1
+        elif playerLeftScreen.type == PlayerLeftScreen.Type.LEFT_UP:
+            pass
         else:
             raise NotImplementedError
+
+        if self._current_screenshot < 0 or self._current_screenshot >= (self._scene_resolution[0] // self._screenshot_resolution[0]):
+            raise RuntimeError("Player left the screen where he should not.")

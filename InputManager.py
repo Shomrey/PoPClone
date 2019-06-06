@@ -4,19 +4,21 @@ from CollisionDetector import CollisionDetector, Side
 
 
 class InputManager:
-    def __init__(self, player, scene_floors):
+    def __init__(self, player):
         self._player = player
-        self._scene_floors = scene_floors
-        self._detector = CollisionDetector(player, scene_floors)
+        self._scene_floors = []
+        self._detector = CollisionDetector(player, self._scene_floors)
         self._jump_queue = queue.Queue()
         self._jump_x = 0
         self._crouching = False
         self._climbing = False
         self._none_pressed = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
-    def on_update(self):
+    def on_update(self, scene_floors):
         pressed = pygame.key.get_pressed()
-        self._detector.on_update()
+
+        self._scene_floors = scene_floors
+        self._detector.on_update(scene_floors)
 
         if self._climbing and self._detector.check_collision(Side.ALL):
             self._jump_queue.put(-6)
@@ -69,9 +71,9 @@ class InputManager:
             if self._crouching:
                 self._stand_up()
 
-    def update_floors(self, scene_floors):
-        self._scene_floors = scene_floors
-        self._detector.update_floors(scene_floors)
+    # def update_floors(self, scene_floors):
+    #     self._scene_floors = scene_floors
+    #     self._detector.update_floors(scene_floors)
 
     def _jump_up(self):
         jump_values = (-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0)  # 55

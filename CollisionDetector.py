@@ -28,7 +28,8 @@ class CollisionDetector:
         self._player_rect_bot = pygame.Rect(0, 0, 0, 0)
         self._scene_floors = scene_floors
 
-    def on_update(self):
+    def on_update(self, scene_floors):
+        self._scene_floors = scene_floors
         self._player_rect_all = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1], 50, 70)
         self._player_rect_top = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1], 50, 20)
         self._player_rect_top_left = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1], 20, 20)
@@ -70,5 +71,5 @@ class CollisionDetector:
         rect1 = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1]-30, 50, 10)
         return rect1.collidelist(self._scene_floors) < 0
 
-    def update_floors(self, scene_floors):
-        self._scene_floors = scene_floors
+    # def update_floors(self, scene_floors):
+    #     self._scene_floors = scene_floors

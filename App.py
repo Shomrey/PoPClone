@@ -3,7 +3,7 @@ import os
 from scene.BasicScene import BasicScene
 from scene.SceneLayer import SceneLayer
 from scene.render.Renderable import Renderable
-from Player import Player
+from Player import Player, PlayerKilled
 from InputManager import InputManager
 from Enemy import Enemy
 from scene.PlayerOutOfScreenObserver import PlayerOutOfScreenObserver, PlayerLeftScreen
@@ -29,6 +29,7 @@ class App:
         self._clock = pygame.time.Clock()
         starting_point = self._scene.get_start_position(self._screen.get_rect())
         self._player = Player(starting_point)
+        self._player.subscribe(PlayerKilled, self._scene.handle_player_killed)
         enemies = self._scene.get_enemies(self._screen.get_rect())
         print("----")
         print(enemies)

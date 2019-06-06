@@ -20,7 +20,6 @@ class PlayerOutOfScreenObserver(Observable):
         self.screen_resolution = screen_resolution
 
     def raise_event(self, type, player):
-        # super(PlayerOutOfScreenObserver, self).event(PlayerLeftScreen(type=type, player=player))
         self.event(PlayerLeftScreen(type=type, player=player))
 
     def check_player_position(self, player):
@@ -38,4 +37,4 @@ class PlayerOutOfScreenObserver(Observable):
             # player.set_position(x, y + self.screen_resolution[0])
         elif y > self.screen_resolution[1]:
             self.raise_event(PlayerLeftScreen.Type.LEFT_DOWN, player)
-            # player.set_position(x, y - self.screen_resolution[0])
+            player.kill_player(False)

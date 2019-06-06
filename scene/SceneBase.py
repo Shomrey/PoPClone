@@ -13,7 +13,7 @@ class SceneBase(ABC):
         self._geometry, self._scene_resolution = SceneParser.parse(scene_file_path)
         screenshot_width = self.get_layer(SceneLayer.SCREEN_BORDERS)[1].get_x() - self.get_layer(SceneLayer.SCREEN_BORDERS)[0].get_x()  # TODO: Handle uneven screenshots
         self._screenshot_resolution = (screenshot_width, self._scene_resolution[1])
-        self._current_screenshot = self.get_screenshot_number(self.get_layer(SceneLayer.START_POSITION)[0].get_x())
+        self.reset_scene()
 
         # contains all layers to be rendered on every on_render call
         self._rendered_layers = [SceneLayer.BACKGROUND, SceneLayer.FOREGROUND]
@@ -91,10 +91,14 @@ class SceneBase(ABC):
             self._current_screenshot -= 1
         elif playerLeftScreen.type == PlayerLeftScreen.Type.LEFT_RIGHT:
             self._current_screenshot += 1
-        elif playerLeftScreen.type == PlayerLeftScreen.Type.LEFT_UP:
-            pass
-        else:
-            raise NotImplementedError
-
+        elif playerLeftScreen.type == PlayerLeftScreen.Type.LEFT_DOWN:
+            self.reset_scene()
         if self._current_screenshot < 0 or self._current_screenshot >= (self._scene_resolution[0] // self._screenshot_resolution[0]):
             raise RuntimeError("Player left the screen where he should not.")
+
+    def reset_scene(self):
+        self._current_screenshot = self.get_screenshot_number(self.get_layer(SceneLayer.START_POSITION)[0].get_x())
+
+    def handle_player_killed(self, playerKilled):
+        self.reset_scene()
+

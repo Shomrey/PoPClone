@@ -44,7 +44,7 @@ class App:
         traps = self._scene.get_traps(self._screen.get_rect())
         # floors = [Renderable.to_screen_rect(rect.get_rect(), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
         #           for rect in self._scene.get_layer(SceneLayer.PHYSICAL_SCENE)]
-        self._input_manager = InputManager(self._player, self._scene, self._screen)
+        self._input_manager = InputManager(self._player)
         for potion in potions:
             self.add_potion(self._player, potion)
         for trap in traps:
@@ -72,7 +72,8 @@ class App:
     def on_update(self):
         self._scene.on_update()
         self._player.on_update()
-        self._input_manager.on_update()
+        floors = self._scene.get_current_screenshot_floors(self._screen)
+        self._input_manager.on_update(floors)
         for i in range(self._number_of_enemies):
             if self._enemies[i].is_alive(): self._enemies[i].on_update()
         self._player_observer.check_player_position(self._player)

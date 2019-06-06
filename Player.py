@@ -1,4 +1,5 @@
 import pygame
+import scene.SceneBase as SB
 
 width = 50
 height = 70
@@ -107,8 +108,9 @@ class Player(pygame.sprite.Sprite):
         screen.blit(self._image, position_rect)
         for i in range(self._health):
             screen.blit(hearth, [10 + 15 * i, 20])
-        for i in range(len(self._potions)):
-            screen.blit(potion, self._potions[i])
+        for potion1 in self._potions:
+            #if SB.get_screenshot_number(potion1[0]) == SB.get_screenshot_number(self._position[0]):
+            screen.blit(potion, potion1)
         for i in range(len(self._traps)):
             screen.blit(trap, self._traps[i])
 

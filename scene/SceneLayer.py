@@ -7,3 +7,6 @@ class SceneLayer(Enum):
     FOREGROUND = 3
     SCREEN_BORDERS = 4
     START_POSITION = 5
+    ENEMIES = 6
+    TRAPS = 7
+    POTIONS = 8

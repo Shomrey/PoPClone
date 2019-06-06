@@ -8,6 +8,8 @@ class Rectangle(Renderable):
         self._colour = colour       # (red, green, blue)
 
     def on_render(self, screen, screenshot_resolution, screenshot_x_offset):
+        #print(self._colour)
+        #self._colour = (0, 0, 0)
         pygame.draw.rect(screen, self._colour, Renderable.to_screen_rect(self._rect, screen.get_rect(), screenshot_resolution, screenshot_x_offset))
 
     def get_x(self):

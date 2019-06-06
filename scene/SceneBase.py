@@ -49,7 +49,35 @@ class SceneBase(ABC):
 
     def get_start_position(self, screen_rect):
         start_position_rect = Renderable.to_screen_rect(self.get_layer(SceneLayer.START_POSITION)[0].get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot)
+        print(start_position_rect.x, start_position_rect.y)
         return [start_position_rect.x, start_position_rect.y]
+
+    def get_enemies(self, screen_rect):
+        enemies = self.get_layer(SceneLayer.ENEMIES)
+        enemies_to_return = []
+        for enemy in enemies:
+            enemy_rect = Renderable.to_screen_rect(enemy.get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot)
+            enemy_info = []
+            enemy_info.append(enemy_rect.x)
+            enemy_info.append(enemy_rect.y)
+            enemy_info.append(SceneBase.get_screenshot_number(self, enemy.get_rect().x))
+            enemies_to_return.append(enemy_info)
+        print(enemies_to_return)
+        return enemies_to_return
+
+    def get_potions(self, screen_rect):
+        potions = self.get_layer(SceneLayer.POTIONS)
+        potions_to_return = []
+        for potion in potions:
+            potions_to_return.append(Renderable.to_screen_rect(potion.get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot))
+        return potions_to_return
+
+    def get_traps(self, screen_rect):
+        traps = self.get_layer(SceneLayer.TRAPS)
+        traps_to_return = []
+        for trap in traps:
+            traps_to_return.append(Renderable.to_screen_rect(trap.get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot))
+        return traps_to_return
 
     def handle_screenshot_change(self, playerLeftScreen):
         if playerLeftScreen.type == PlayerLeftScreen.Type.LEFT_LEFT:

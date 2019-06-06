@@ -10,7 +10,10 @@ import os
 LAYERS_NAMES = {SceneLayer.BACKGROUND:      "LEVEL_BACKGROUND",
                 SceneLayer.FOREGROUND:      "LEVEL_FOREGROUND",
                 SceneLayer.PHYSICAL_SCENE:  "LEVEL_FLOORS",
-                SceneLayer.SCREEN_BORDERS:  "SCREEN_BORDERS"}
+                SceneLayer.SCREEN_BORDERS:  "SCREEN_BORDERS",
+                SceneLayer.ENEMIES:         "ENEMIES",
+                SceneLayer.TRAPS:           "TRAPS",
+                SceneLayer.POTIONS:         "POTIONS"}
 
 class SceneParser:
     @staticmethod

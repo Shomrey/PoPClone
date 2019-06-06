@@ -56,7 +56,7 @@ class SceneBase(ABC):
         enemies = self.get_layer(SceneLayer.ENEMIES)
         enemies_to_return = []
         for enemy in enemies:
-            enemy_rect = Renderable.to_screen_rect(enemy.get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot)
+            enemy_rect = enemy.get_rect()
             enemy_info = []
             enemy_info.append(enemy_rect.x)
             enemy_info.append(enemy_rect.y)

@@ -33,6 +33,9 @@ class Enemy(pygame.sprite.Sprite):
         self._is_alive = True
         self._screen_number = screen_number
 
+    def insta_kill(self):
+        self._is_alive = False
+
     def get_screen_number(self):
         return self._screen_number
 

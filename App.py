@@ -30,16 +30,18 @@ class App:
         starting_point = self._scene.get_start_position(self._screen.get_rect())
         self._player = Player(starting_point)
         enemies = self._scene.get_enemies(self._screen.get_rect())
+        self._enemies_to_spawn = enemies
         print("----")
         print(enemies)
-        for enemy in enemies:
+        """for enemy in enemies:
             print(enemy[0], enemy[1])
             enemy_to_spawn = [enemy[0], enemy[1]]
             print(enemy_to_spawn)
             self.spawn_enemy(self._player, enemy_to_spawn, enemy[2])
-            print("I am spawned")
+            print("I am spawned")"""
         print("enemies spawned")
         print(self._enemies)
+        print(self._enemies_to_spawn)
         potions = self._scene.get_potions(self._screen.get_rect())
         traps = self._scene.get_traps(self._screen.get_rect())
         floors = [Renderable.to_screen_rect(rect.get_rect(), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
@@ -73,7 +75,18 @@ class App:
         self._scene.on_update()
         self._player.on_update()
         self._input_manager.on_update()
+        for enem in self._enemies_to_spawn:
+            print(enem)
+            if self._scene.get_current_screenshot() == enem[2]:
+                en = Renderable.to_screen_rect(pygame.Rect(enem[0], enem[1], 50, 70), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
+                self.spawn_enemy(self._player, [en.x, en.y], enem[2])
+                self._enemies_to_spawn.remove(enem)
         for i in range(self._number_of_enemies):
+            print("----")
+            print(self._enemies[i].get_screen_number())
+            print("----")
+            if self._enemies[i].get_screen_number() != self._scene.get_current_screenshot():
+                self._enemies[i].insta_kill()
             if self._enemies[i].is_alive(): self._enemies[i].on_update()
         self._player_observer.check_player_position(self._player)
 

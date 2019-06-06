@@ -49,7 +49,7 @@ class SceneBase(ABC):
 
     def get_start_position(self, screen_rect):
         start_position_rect = Renderable.to_screen_rect(self.get_layer(SceneLayer.START_POSITION)[0].get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot)
-        print(start_position_rect.x, start_position_rect.y)
+
         return [start_position_rect.x, start_position_rect.y]
 
     def get_enemies(self, screen_rect):
@@ -62,7 +62,7 @@ class SceneBase(ABC):
             enemy_info.append(enemy_rect.y)
             enemy_info.append(SceneBase.get_screenshot_number(self, enemy.get_rect().x))
             enemies_to_return.append(enemy_info)
-        print(enemies_to_return)
+
         return enemies_to_return
 
     def get_potions(self, screen_rect):
@@ -87,9 +87,6 @@ class SceneBase(ABC):
             trap_info.append(trap_rect.y)
             trap_info.append(SceneBase.get_screenshot_number(self, trap.get_rect().x))
             traps_to_return.append(trap_info)
-        print("..............")
-        print(traps_to_return)
-        print("..............")
         return traps_to_return
 
     def handle_screenshot_change(self, playerLeftScreen):

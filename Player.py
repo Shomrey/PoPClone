@@ -115,10 +115,6 @@ class Player(pygame.sprite.Sprite):
 
     def on_render(self, screen):
         position_rect = self._image.get_rect().move(self._position[0], self._position[1])
-        print("+++++++++")
-        print(self._potions)
-        print(self._traps)
-        print("++++++++++++")
         screen.blit(self._image, position_rect)
         for i in range(self._health):
             screen.blit(hearth, [10 + 15 * i, 20])
@@ -126,9 +122,6 @@ class Player(pygame.sprite.Sprite):
             #if SB.get_screenshot_number(potion1[0]) == SB.get_screenshot_number(self._position[0]):
             if potion1[2] == self._scene.get_current_screenshot():
                 potion_pos = Renderable.to_screen_rect(pygame.Rect(potion1[0], potion1[1], 20, 20), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
-                print("---")
-                print(potion_pos)
-                print("---")
                 screen.blit(potion, pygame.Rect(potion_pos.x, potion_pos.y, 20, 20))
         for trap1 in self._traps:
             if trap1[2] == self._scene.get_current_screenshot():
@@ -136,9 +129,7 @@ class Player(pygame.sprite.Sprite):
                                                        self._screen.get_rect(), self._scene.get_screenshot_resolution(),
                                                        self._scene.get_screenshot_resolution()[
                                                            0] * self._scene.get_current_screenshot())
-                print("---")
-                print(trap_pos)
-                print("---")
+
                 screen.blit(potion, pygame.Rect(trap_pos.x, trap_pos.y, 20, 20))
 
     def get_position(self):

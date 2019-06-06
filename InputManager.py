@@ -1,36 +1,32 @@
 import pygame
 import queue
+from CollisionDetector import CollisionDetector, Side
 
 
 class InputManager:
     def __init__(self, player, scene_floors):
         self._player = player
-        self._player_rect_top = 0
-        self._player_rect_bot = 0
-        self._scene_resolution = (760, 520)
+        # self._scene_resolution = (760, 520)
         self._scene_floors = scene_floors
+        self._detector = CollisionDetector(player, scene_floors)
         self._jump_queue = queue.Queue()
         self._jump_x = 0
         self._crouching = False
         self._none_pressed = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
     def on_update(self):
-
         pressed = pygame.key.get_pressed()
 
-        self._player_rect_top = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1], 50, 20)
-        self._player_rect_bot = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1] + 50, 50, 20)
-
-        if self._player_rect_top.collidelist(self._scene_floors) >= 0:
+        if self._detector.check_collision(Side.TOP):
             while not self._jump_queue.empty(): self._jump_queue.get()
             jump_values = (-8, -7, -6)
             for i in jump_values: self._jump_queue.put(i)
 
-        if self._player_rect_bot.collidelist(self._scene_floors) < 0:
-            self._jump_queue.put(9)
-        else:
+        if self._detector.check_collision(Side.BOT):
             while not self._jump_queue.empty(): self._jump_queue.get()
-
+        else:
+            self._jump_queue.put(9)
+            
         if not self._jump_queue.empty():
             pressed = self._none_pressed
             self._jump_continue()

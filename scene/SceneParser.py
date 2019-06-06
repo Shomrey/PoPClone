@@ -87,8 +87,11 @@ class SceneParser:
     def _parse_transform(xml_element):
         try:
             result = parse("scale({},{})", xml_element.attributes['transform'].value)
-            scale_x, scale_y = float(result[0]), float(result[1])
-            return scale_x, scale_y
+            if result:
+                scale_x, scale_y = float(result[0]), float(result[1])
+                return scale_x, scale_y
+            else:
+                return 1, 1
         except KeyError:
             return 1, 1
 

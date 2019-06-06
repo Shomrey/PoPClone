@@ -74,28 +74,41 @@ potion = pygame.transform.scale(pygame.image.load('png/potion.png'), (20, 20))
 
 trap = pygame.transform.scale(pygame.image.load('png/trap.png'), (20, 20))
 
+from util.Observable import Event, Observable
 
-class Player(pygame.sprite.Sprite):
-    def __init__(self, scene, screen, position=[20, 258]):
+
+class PlayerKilled(Event):
+    pass
+
+
+class Player(pygame.sprite.Sprite, Observable):
+    INITIAL_HEALTH = 3
+
+    def __init__(self, scene, screen, position=(20, 258)):
         pygame.sprite.Sprite.__init__(self)
-        self._position = position
+        Observable.__init__(self)
+        self._initial_position = position
+        self._reset()
+        self._potions = []
+        self._traps = []
+        self._scene = scene
+        self._screen = screen
+
+    def _reset(self):
+        self._health = Player.INITIAL_HEALTH
         self._sprite_size = [50, 70]
         self._image = pygame.transform.scale(pygame.image.load('png/Run/Right_1.png'), self._sprite_size)
         self._direction = "Right"
         self._walkCount = 0
         self._inAir = False
-        self._health = 3
+        self._position = list(self._initial_position)
         self._edge = 0
-        self._potions = []
-        self._traps = []
         self._attacked_left = False
-        self._scene = scene
-        self._screen = screen
 
     def on_update(self):
         if self._health <= 0:
             # disable Input Manager
-            self.death_animation()
+            self.kill_player(True)
         if len(self._potions) > 0:
             for i in self._potions:
                 if i[2] == self._scene.get_current_screenshot():
@@ -107,9 +120,9 @@ class Player(pygame.sprite.Sprite):
             for i in self._traps:
                 if i[2] == self._scene.get_current_screenshot():
                     trap_pos = Renderable.to_screen_rect(pygame.Rect(i[0], i[1], 20, 20), self._screen.get_rect(),
-                                                           self._scene.get_screenshot_resolution(),
-                                                           self._scene.get_screenshot_resolution()[
-                                                               0] * self._scene.get_current_screenshot())
+                                                         self._scene.get_screenshot_resolution(),
+                                                         self._scene.get_screenshot_resolution()[
+                                                             0] * self._scene.get_current_screenshot())
                     if trap_pos.x - width < self._position[0] < trap_pos.x and trap_pos.y >= self._position[1] >= trap_pos.y - 10:
                         self._health = 0
 
@@ -126,9 +139,9 @@ class Player(pygame.sprite.Sprite):
         for trap1 in self._traps:
             if trap1[2] == self._scene.get_current_screenshot():
                 trap_pos = Renderable.to_screen_rect(pygame.Rect(trap1[0], trap1[1], 20, 20),
-                                                       self._screen.get_rect(), self._scene.get_screenshot_resolution(),
-                                                       self._scene.get_screenshot_resolution()[
-                                                           0] * self._scene.get_current_screenshot())
+                                                     self._screen.get_rect(), self._scene.get_screenshot_resolution(),
+                                                     self._scene.get_screenshot_resolution()[
+                                                         0] * self._scene.get_current_screenshot())
 
                 screen.blit(potion, pygame.Rect(trap_pos.x, trap_pos.y, 20, 20))
 
@@ -216,6 +229,12 @@ class Player(pygame.sprite.Sprite):
                 timer -= 1
             self._image = death[i]
             self._walkCount += 1
+
+    def kill_player(self, play_animation):
+        if play_animation:
+            self.death_animation()
+        self._reset()
+        self.event(PlayerKilled())
 
     def get_health(self):
         return self._health

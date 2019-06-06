@@ -3,7 +3,7 @@ import os
 from scene.BasicScene import BasicScene
 from scene.SceneLayer import SceneLayer
 from scene.render.Renderable import Renderable
-from Player import Player
+from Player import Player, PlayerKilled
 from InputManager import InputManager
 from Enemy import Enemy
 from scene.PlayerOutOfScreenObserver import PlayerOutOfScreenObserver, PlayerLeftScreen
@@ -29,13 +29,14 @@ class App:
         self._clock = pygame.time.Clock()
         starting_point = self._scene.get_start_position(self._screen.get_rect())
         self._player = Player(self._scene, self._screen, starting_point)
+        self._player.subscribe(PlayerKilled, self._scene.handle_player_killed)
         enemies = self._scene.get_enemies(self._screen.get_rect())
         self._enemies_to_spawn = enemies
         potions = self._scene.get_potions(self._screen.get_rect())
         traps = self._scene.get_traps(self._screen.get_rect())
-        floors = [Renderable.to_screen_rect(rect.get_rect(), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
-                  for rect in self._scene.get_layer(SceneLayer.PHYSICAL_SCENE)]
-        self._input_manager = InputManager(self._player, floors)
+        # floors = [Renderable.to_screen_rect(rect.get_rect(), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
+        #           for rect in self._scene.get_layer(SceneLayer.PHYSICAL_SCENE)]
+        self._input_manager = InputManager(self._player)
         for potion in potions:
             self.add_potion(self._player, potion)
         for trap in traps:
@@ -58,13 +59,14 @@ class App:
     def on_update(self):
         self._scene.on_update()
         self._player.on_update()
-        self._input_manager.on_update()
         for enem in self._enemies_to_spawn:
 
             if self._scene.get_current_screenshot() == enem[2]:
                 en = Renderable.to_screen_rect(pygame.Rect(enem[0], enem[1], 50, 70), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
                 self.spawn_enemy(self._player, [en.x, en.y], enem[2])
                 self._enemies_to_spawn.remove(enem)
+        floors = self._scene.get_current_screenshot_floors(self._screen)
+        self._input_manager.on_update(floors)
         for i in range(self._number_of_enemies):
 
             if self._enemies[i].get_screen_number() != self._scene.get_current_screenshot():
@@ -78,7 +80,6 @@ class App:
         for i in range(self._number_of_enemies):
             if self._enemies[i].is_alive(): self._enemies[i].on_render(self._screen)
         pygame.display.flip()   # this call is required to perform updates to the game screen
-
 
     def on_event(self, event):
         if event.type == pygame.QUIT:

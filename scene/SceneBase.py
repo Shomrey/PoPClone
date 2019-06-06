@@ -69,7 +69,12 @@ class SceneBase(ABC):
         potions = self.get_layer(SceneLayer.POTIONS)
         potions_to_return = []
         for potion in potions:
-            potions_to_return.append(Renderable.to_screen_rect(potion.get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot))
+            potion_rect = potion.get_rect()
+            potion_info = []
+            potion_info.append(potion_rect.x)
+            potion_info.append(potion_rect.y)
+            potion_info.append(SceneBase.get_screenshot_number(self, potion.get_rect().x))
+            potions_to_return.append(potion_info)
         return potions_to_return
 
     def get_traps(self, screen_rect):

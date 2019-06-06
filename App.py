@@ -28,7 +28,7 @@ class App:
         self._screen = pygame.display.set_mode(self._resolution)
         self._clock = pygame.time.Clock()
         starting_point = self._scene.get_start_position(self._screen.get_rect())
-        self._player = Player(starting_point)
+        self._player = Player(self._scene, self._screen, starting_point)
         enemies = self._scene.get_enemies(self._screen.get_rect())
         self._enemies_to_spawn = enemies
         print("----")

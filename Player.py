@@ -1,5 +1,6 @@
 import pygame
 import scene.SceneBase as SB
+from scene.render.Renderable import Renderable
 
 width = 50
 height = 70
@@ -75,7 +76,7 @@ trap = pygame.transform.scale(pygame.image.load('png/trap.png'), (20, 20))
 
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position=[20, 258]):
+    def __init__(self, scene, screen, position=[20, 258]):
         pygame.sprite.Sprite.__init__(self)
         self._position = position
         self._sprite_size = [50, 70]
@@ -88,6 +89,8 @@ class Player(pygame.sprite.Sprite):
         self._potions = []
         self._traps = []
         self._attacked_left = False
+        self._scene = scene
+        self._screen = screen
 
     def on_update(self):
         if self._health <= 0:
@@ -95,9 +98,11 @@ class Player(pygame.sprite.Sprite):
             self.death_animation()
         if len(self._potions) > 0:
             for i in self._potions:
-                if i[0] - width <= self._position[0] <= i[0] and i[1] >= self._position[1] >= i[1] - height:
-                    self._potions.remove(i)
-                    self._health += 1
+                if i[2] == self._scene.get_current_screenshot():
+                    potion_pos = Renderable.to_screen_rect(pygame.Rect(i[0], i[1], 20, 20), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
+                    if potion_pos.x - width <= self._position[0] <= potion_pos.x and potion_pos.y >= self._position[1] >= potion_pos.y - height:
+                        self._potions.remove(i)
+                        self._health += 1
         if len(self._traps) > 0:
             for i in self._traps:
                 if i[0] - width < self._position[0] < i[0] and i[1] >= self._position[1] >= i[1] - 10:
@@ -105,12 +110,21 @@ class Player(pygame.sprite.Sprite):
 
     def on_render(self, screen):
         position_rect = self._image.get_rect().move(self._position[0], self._position[1])
+        print("+++++++++")
+        print(self._potions)
+        print(self._traps)
+        print("++++++++++++")
         screen.blit(self._image, position_rect)
         for i in range(self._health):
             screen.blit(hearth, [10 + 15 * i, 20])
         for potion1 in self._potions:
             #if SB.get_screenshot_number(potion1[0]) == SB.get_screenshot_number(self._position[0]):
-            screen.blit(potion, potion1)
+            if potion1[2] == self._scene.get_current_screenshot():
+                potion_pos = Renderable.to_screen_rect(pygame.Rect(potion1[0], potion1[1], 20, 20), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
+                print("---")
+                print(potion_pos)
+                print("---")
+                screen.blit(potion, pygame.Rect(potion_pos.x, potion_pos.y, 20, 20))
         for i in range(len(self._traps)):
             screen.blit(trap, self._traps[i])
 

@@ -11,25 +11,41 @@ class InputManager:
         self._jump_queue = queue.Queue()
         self._jump_x = 0
         self._crouching = False
+        self._climbing = False
         self._none_pressed = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
     def on_update(self):
         pressed = pygame.key.get_pressed()
         self._detector.on_update()
 
-        if self._detector.check_collision(Side.TOP):
-            while not self._jump_queue.empty(): self._jump_queue.get()
-            jump_values = (-8, -7, -6)
-            for i in jump_values: self._jump_queue.put(i)
-
-        if self._detector.check_collision(Side.BOT):
+        if self._climbing and self._detector.check_collision(Side.ALL):
+            self._jump_queue.put(-6)
+        elif self._detector.check_on_edge(Side.MID):
+            if self._detector.check_collision(Side.MID_LEFT):
+                pressed = self._none_pressed
+                self._player.set_position_relative(1, None)
+                self._jump_x = 0
+            elif self._detector.check_collision(Side.MID_RIGHT):
+                pressed = self._none_pressed
+                self._player.set_position_relative(-1, None)
+                self._jump_x = 0
+        elif self._detector.check_collision(Side.TOP):
+            if self._detector.check_on_edge(Side.TOP):
+                while not self._jump_queue.empty(): self._jump_queue.get()
+                jump_values = (-8, -7, -6)
+                for i in jump_values: self._jump_queue.put(i)
+                self._climbing = True
+        elif self._detector.check_collision(Side.BOT):
             while not self._jump_queue.empty(): self._jump_queue.get()
         else:
             self._jump_queue.put(9)
+            self._climbing = False
 
         if not self._jump_queue.empty():
             pressed = self._none_pressed
             self._jump_continue()
+        else: self._jump_x = 0
+        
         if self._player.get_health() > 0:
             if pressed[pygame.K_SPACE]:
                 self._attack()

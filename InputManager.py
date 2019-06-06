@@ -3,12 +3,13 @@ import queue
 
 
 class InputManager:
-    def __init__(self, player, scene_floors):
+    def __init__(self, player, scene, screen):
         self._player = player
         self._player_rect_top = 0
         self._player_rect_bot = 0
         self._scene_resolution = (760, 520)
-        self._scene_floors = scene_floors
+        self._scene = scene
+        self._screen = screen
         self._jump_queue = queue.Queue()
         self._jump_x = 0
         self._crouching = False
@@ -21,13 +22,15 @@ class InputManager:
         self._player_rect_top = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1], 50, 20)
         self._player_rect_bot = pygame.Rect(self._player.get_position()[0], self._player.get_position()[1] + 50, 50, 20)
 
-        if self._player_rect_top.collidelist(self._scene_floors) >= 0:
+        scene_floors = self._scene.get_current_screenshot_floors(self._screen)
+
+        if self._player_rect_top.collidelist(scene_floors) >= 0:
             while not self._jump_queue.empty(): self._jump_queue.get()
             jump_values = (-8, -7, -6)
             for i in jump_values: self._jump_queue.put(i)
             self._jump_queue.put(-9)
 
-        if self._player_rect_bot.collidelist(self._scene_floors) < 0:
+        if self._player_rect_bot.collidelist(scene_floors) < 0:
             self._jump_queue.put(9)
         else:
             while not self._jump_queue.empty(): self._jump_queue.get()

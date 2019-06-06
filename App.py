@@ -42,9 +42,9 @@ class App:
         print(self._enemies)
         potions = self._scene.get_potions(self._screen.get_rect())
         traps = self._scene.get_traps(self._screen.get_rect())
-        floors = [Renderable.to_screen_rect(rect.get_rect(), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
-                  for rect in self._scene.get_layer(SceneLayer.PHYSICAL_SCENE)]
-        self._input_manager = InputManager(self._player, floors)
+        # floors = [Renderable.to_screen_rect(rect.get_rect(), self._screen.get_rect(), self._scene.get_screenshot_resolution(), self._scene.get_screenshot_resolution()[0] * self._scene.get_current_screenshot())
+        #           for rect in self._scene.get_layer(SceneLayer.PHYSICAL_SCENE)]
+        self._input_manager = InputManager(self._player, self._scene, self._screen)
         for potion in potions:
             self.add_potion(self._player, potion)
         for trap in traps:

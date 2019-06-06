@@ -79,6 +79,13 @@ class SceneBase(ABC):
             traps_to_return.append(Renderable.to_screen_rect(trap.get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot))
         return traps_to_return
 
+    def get_current_screenshot_floors(self, screen):
+        floors = [Renderable.to_screen_rect(
+            rect.get_rect(), screen.get_rect(), self.get_screenshot_resolution(),
+            self.get_screenshot_resolution()[0] * self.get_current_screenshot())
+            for rect in self.get_layer(SceneLayer.PHYSICAL_SCENE)]
+        return floors
+
     def handle_screenshot_change(self, playerLeftScreen):
         if playerLeftScreen.type == PlayerLeftScreen.Type.LEFT_LEFT:
             self._current_screenshot -= 1

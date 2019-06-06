@@ -20,8 +20,13 @@ class InputManager:
 
         if self._climbing and self._detector.check_collision(Side.ALL):
             self._jump_queue.put(-6)
-        elif self._detector.check_on_edge(Side.MID):
-            if self._detector.check_collision(Side.MID_LEFT):
+        elif self._detector.check_on_edge(Side.MID) or self._detector.check_on_edge(Side.TOP):
+            if self._detector.check_can_climb():
+                while not self._jump_queue.empty(): self._jump_queue.get()
+                jump_values = (-8, -7, -6)
+                for i in jump_values: self._jump_queue.put(i)
+                self._climbing = True
+            elif self._detector.check_collision(Side.MID_LEFT):
                 pressed = self._none_pressed
                 self._player.set_position_relative(1, None)
                 self._jump_x = 0
@@ -29,12 +34,12 @@ class InputManager:
                 pressed = self._none_pressed
                 self._player.set_position_relative(-1, None)
                 self._jump_x = 0
-        elif self._detector.check_collision(Side.TOP):
-            if self._detector.check_on_edge(Side.TOP):
-                while not self._jump_queue.empty(): self._jump_queue.get()
-                jump_values = (-8, -7, -6)
-                for i in jump_values: self._jump_queue.put(i)
-                self._climbing = True
+        # elif self._detector.check_collision(Side.TOP):
+        #     if self._detector.check_on_edge(Side.TOP):
+        #         while not self._jump_queue.empty(): self._jump_queue.get()
+        #         jump_values = (-8, -7, -6)
+        #         for i in jump_values: self._jump_queue.put(i)
+        #         self._climbing = True
         elif self._detector.check_collision(Side.BOT):
             while not self._jump_queue.empty(): self._jump_queue.get()
         else:
@@ -69,19 +74,19 @@ class InputManager:
         self._detector.update_floors(scene_floors)
 
     def _jump_up(self):
-        jump_values = (-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0)  # 45
+        jump_values = (-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0)  # 55
         for i in jump_values: self._jump_queue.put(i)
         self._jump_x = 0
         self._jump_continue()
 
     def _jump_left(self):
-        jump_values = (-9, -8, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 8, 9)  # 33
+        jump_values = (-9, -8, -7, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 7, 8, 9)  # 40
         for i in jump_values: self._jump_queue.put(i)
         self._jump_x = -6
         self._jump_continue()
 
     def _jump_right(self):
-        jump_values = (-9, -8, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 8, 9)
+        jump_values = (-9, -8, -7, -6, -5, -3, -2, 0, 0, 0, 2, 3, 5, 6, 7, 8, 9)
         for i in jump_values: self._jump_queue.put(i)
         self._jump_x = 6
         self._jump_continue()

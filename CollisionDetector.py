@@ -66,5 +66,10 @@ class CollisionDetector:
         else:
             raise NotImplementedError
 
+    def check_can_climb(self):
+        rect1 = pygame.Rect(self._player.get_position()[0]+20, self._player.get_position()[1]+100, 10, 2)
+        return rect1.collidelist(self._scene_floors) < 0
+        # ???
+
     def update_floors(self, scene_floors):
         self._scene_floors = scene_floors

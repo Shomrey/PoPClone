@@ -81,7 +81,15 @@ class SceneBase(ABC):
         traps = self.get_layer(SceneLayer.TRAPS)
         traps_to_return = []
         for trap in traps:
-            traps_to_return.append(Renderable.to_screen_rect(trap.get_rect(), screen_rect, self._screenshot_resolution, self._screenshot_resolution[0] * self._current_screenshot))
+            trap_rect = trap.get_rect()
+            trap_info = []
+            trap_info.append(trap_rect.x)
+            trap_info.append(trap_rect.y)
+            trap_info.append(SceneBase.get_screenshot_number(self, trap.get_rect().x))
+            traps_to_return.append(trap_info)
+        print("..............")
+        print(traps_to_return)
+        print("..............")
         return traps_to_return
 
     def handle_screenshot_change(self, playerLeftScreen):

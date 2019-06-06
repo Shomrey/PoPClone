@@ -105,8 +105,13 @@ class Player(pygame.sprite.Sprite):
                         self._health += 1
         if len(self._traps) > 0:
             for i in self._traps:
-                if i[0] - width < self._position[0] < i[0] and i[1] >= self._position[1] >= i[1] - 10:
-                    self._health = 0
+                if i[2] == self._scene.get_current_screenshot():
+                    trap_pos = Renderable.to_screen_rect(pygame.Rect(i[0], i[1], 20, 20), self._screen.get_rect(),
+                                                           self._scene.get_screenshot_resolution(),
+                                                           self._scene.get_screenshot_resolution()[
+                                                               0] * self._scene.get_current_screenshot())
+                    if trap_pos.x - width < self._position[0] < trap_pos.x and trap_pos.y >= self._position[1] >= trap_pos.y - 10:
+                        self._health = 0
 
     def on_render(self, screen):
         position_rect = self._image.get_rect().move(self._position[0], self._position[1])
@@ -125,8 +130,16 @@ class Player(pygame.sprite.Sprite):
                 print(potion_pos)
                 print("---")
                 screen.blit(potion, pygame.Rect(potion_pos.x, potion_pos.y, 20, 20))
-        for i in range(len(self._traps)):
-            screen.blit(trap, self._traps[i])
+        for trap1 in self._traps:
+            if trap1[2] == self._scene.get_current_screenshot():
+                trap_pos = Renderable.to_screen_rect(pygame.Rect(trap1[0], trap1[1], 20, 20),
+                                                       self._screen.get_rect(), self._scene.get_screenshot_resolution(),
+                                                       self._scene.get_screenshot_resolution()[
+                                                           0] * self._scene.get_current_screenshot())
+                print("---")
+                print(trap_pos)
+                print("---")
+                screen.blit(potion, pygame.Rect(trap_pos.x, trap_pos.y, 20, 20))
 
     def get_position(self):
         return self._position

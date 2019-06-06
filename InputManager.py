@@ -25,7 +25,6 @@ class InputManager:
             while not self._jump_queue.empty(): self._jump_queue.get()
             jump_values = (-8, -7, -6)
             for i in jump_values: self._jump_queue.put(i)
-            self._jump_queue.put(-9)
 
         if self._player_rect_bot.collidelist(self._scene_floors) < 0:
             self._jump_queue.put(9)
@@ -53,11 +52,12 @@ class InputManager:
             if self._crouching:
                 self._stand_up()
 
+        # if self._player.get_position()[0] < 0:
+        #     self._player.set_position(0, None)
+        #     self._jump_x = 0
 
-
-        if self._player.get_position()[0] < 0:
-            self._player.set_position(0, None)
-            self._jump_x = 0
+    def update_floors(self, scene_floors):
+        self._scene_floors = scene_floors
 
     def _jump_up(self):
         jump_values = (-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0)  # 45
@@ -79,7 +79,6 @@ class InputManager:
 
     def _jump_continue(self):
         self._player.set_position_relative(self._jump_x, self._jump_queue.get())
-
 
     def _move_left(self):
         self._player.set_position_relative(-3, None)

@@ -108,7 +108,10 @@ class SceneParser:
 
         # Parse color
         color = search("fill:#{};", rect.attributes['style'].value)[0]
-        r, g, b = [int(parsed, 16) for parsed in parse("{:.2}{:.2}{:2}", color)]
+        if color:
+            r, g, b = [int(parsed, 16) for parsed in parse("{:.2}{:.2}{:.2}", color)]
+        else:
+            r, g, b = 0, 0, 0
 
         return Rectangle(x, y, width, height, (r, g, b), scale_x, scale_y)
 
